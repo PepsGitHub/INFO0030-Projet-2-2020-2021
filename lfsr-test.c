@@ -1,5 +1,5 @@
 #include "lfsr.h"
-#include "seatest/seatest.h"
+#include "seatest.h"
 
 static void test_create_lfsr(){
    LFSR *register11tap8 = create_lfsr(11, "01101000010", 8);
@@ -11,7 +11,7 @@ static void test_create_lfsr(){
    destroy_lfsr(register11tap8, 1);
 }//fin test_create_lfsr
 
-
+/*
 static void test_initialisation(){
 
 }

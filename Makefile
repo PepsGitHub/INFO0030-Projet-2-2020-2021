@@ -1,6 +1,6 @@
 ### 
 ## Makefile skeleton
-## INFO0030: Projet 1
+## INFO0030: Projet 2
 ## 
 ### 
 
@@ -13,23 +13,29 @@ LD=gcc
 LDFLAGS=
 
 # Files
-EXEC=pnm
-MODULES=main.c pnm.c
-OBJECTS=main.o pnm.o
+EXEC=output
+MODULES=lfsr-test.c lfsr.c seatest.c
+OBJECTS=lfsr-test.o lfsr.o seatest.o
 
 ## Rules
 
 all: $(EXEC)
 
-pnm: $(OBJECTS)
+output: $(OBJECTS)
 	$(LD) -o $(EXEC) $(OBJECTS) $(LDFLAGS)
 
-main.o: main.c
-	$(CC) -c main.c -o main.o $(CFLAGS)
+lfsr-test.o: lfsr-test.c
+	$(CC) -c lfsr-test.c -o lfsr-test.o $(CFLAGS)
 
-pnm.o: pnm.c
-	$(CC) -c pnm.c -o pnm.o $(CFLAGS)
+lfsr.o: lfsr.c
+	$(CC) -c lfsr.c -o lfsr.o $(CFLAGS)
+
+seatest.o: seatest.c
+	$(CC) -c seatest.c -o seatest.o $(CFLAGS)
 
 clean:
 	rm -f *.o $(EXEC) *~
+
+archive:
+	tar -zcvf chiffrement.tar.gz *.h *.c *.o README.md Makefile doxygen
 

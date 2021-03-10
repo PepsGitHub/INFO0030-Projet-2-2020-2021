@@ -16,6 +16,7 @@
 
 #include "pnm.h"
 #include "lfsr.h"
+#include "seatest.h"
 
 /**
  * Définition du type opaque LFSR
