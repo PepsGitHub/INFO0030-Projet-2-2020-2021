@@ -5,7 +5,7 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 09/03/21
+ * @date: 10/03/21
  * @projet: INFO0030 Projet 2
  */
 
@@ -23,13 +23,13 @@
  *
  */
 struct LFSR_t{
-   unsigned short N;//nombre de bits dans le registre
+   unsigned int N;//nombre de bits dans le registre
    char seed[100]; //séquence de bits initiale du registre
-   unsigned short tap;//bit situé à une position particulière
+   unsigned int tap;//bit situé à une position particulière
 };
 
 //debut constructeur
-LFSR *create_lfsr(unsigned short N, char *seed, unsigned short tap){
+LFSR *create_lfsr(unsigned int N, char *seed, unsigned int tap){
    assert(N > 0 && seed != NULL && tap > 0 && tap < N);
 
    LFSR *lfsr = malloc(sizeof(LFSR));
@@ -44,7 +44,7 @@ LFSR *create_lfsr(unsigned short N, char *seed, unsigned short tap){
 }//fin constructeur
 
 //debut accesseurs en lecture
-unsigned short get_N(LFSR *lfsr){
+unsigned int get_N(LFSR *lfsr){
    assert(lfsr != NULL);
 
    return lfsr->N;
@@ -56,14 +56,14 @@ char *get_seed(LFSR *lfsr){
    return lfsr->seed;
 }
 
-unsigned short get_tap(LFSR *lfsr){
+unsigned int get_tap(LFSR *lfsr){
    assert(lfsr != NULL);
 
    return lfsr->tap;
 }//fin accesseurs en lecture
 
 //debut accesseurs en ecriture
-LFSR *set_N(LFSR *lfsr, unsigned short N){
+LFSR *set_N(LFSR *lfsr, unsigned int N){
    assert(lfsr!=NULL && N > 0);
 
    lfsr->N = N;
@@ -74,13 +74,13 @@ LFSR *set_N(LFSR *lfsr, unsigned short N){
 LFSR *set_seed(LFSR *lfsr, char *seed){
    assert(lfsr!=NULL && seed != NULL);
 
-   for(int i = 0; i < get_N(lfsr); i++)
+   for(unsigned int i = 0; i < get_N(lfsr); i++)
       lfsr->seed[i] = seed[i];
 
    return lfsr;
 }
 
-LFSR *set_tap(LFSR *lfsr, unsigned short tap){
+LFSR *set_tap(LFSR *lfsr, unsigned int tap){
    assert(lfsr!=NULL && tap > 0 && tap < get_N(lfsr));
 
    lfsr->tap = tap;
@@ -89,7 +89,7 @@ LFSR *set_tap(LFSR *lfsr, unsigned short tap){
 }//fin accesseurs en écriture
 
 //debut destroy
-void destroy_lfsr(LFSR *lfsr, unsigned short allocation_value){
+void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value){
    assert(lfsr != NULL && allocation_value > 0 && allocation_value < 2);
    switch(allocation_value){
    case 1://détruit lfsr
@@ -98,10 +98,10 @@ void destroy_lfsr(LFSR *lfsr, unsigned short allocation_value){
    }
 }//fin destroy
 
-LFSR *initialisation(char *seed, unsigned short tap){
+LFSR *initialisation(char *seed, unsigned int tap){
    assert(seed != NULL && tap > 0 && tap < strlen(seed));
 
-   unsigned short N = strlen(seed);
+   unsigned int N = strlen(seed);
    LFSR *lfsr = create_lfsr(N, seed, tap);
 
    return lfsr;
@@ -111,11 +111,11 @@ int operation(LFSR *lfsr){
    assert(lfsr != NULL);
 
    char *stateRegister = get_seed(lfsr);
-   unsigned short indexTap = get_N(lfsr) - get_tap(lfsr) - 1;
+   unsigned int indexTap = get_N(lfsr) - get_tap(lfsr) - 1;
 
    char firstChar = stateRegister[0], tapChar = stateRegister[indexTap];
    int bit = 0;
-   for(int i = 0; i < get_N(lfsr)-1; i++){
+   for(unsigned int i = 0; i < get_N(lfsr)-1; i++){
       stateRegister[i] = stateRegister[i+1];
    }
 
@@ -130,6 +130,29 @@ int operation(LFSR *lfsr){
    }
 }
 
+/*int reverse_operation(LFSR *lfsr){
+   assert(lfsr != NULL);
+
+   char *stateRegister = get_seed(lfsr);
+   unsigned int indexTap = get_N(lfsr) - get_tap(lfsr) - 2;
+
+   char lastChar = stateRegister[get_N(lfsr) - 1], tapChar = stateRegister[indexTap];
+   int bit = 0;
+   for(unsigned int i = 0; i < get_N(lfsr) - 1; i++){
+      stateRegister[i+1] = stateRegister[i];
+   }
+
+   if(lastChar == tapChar){
+      stateRegister[0] = '0';
+      bit = 0;
+      return bit;
+   }else{
+      stateRegister[0] = '1';
+      bit = 1;
+      return bit;
+   }
+}*/
+
 char *string(LFSR *lfsr){
    assert(lfsr != NULL);
 
@@ -138,10 +161,11 @@ char *string(LFSR *lfsr){
    return state_register;
 }
 
-int generation(LFSR *lfsr, unsigned short k){
+int generation(LFSR *lfsr, unsigned int k){
    assert(lfsr != NULL && k > 0);
+
    int var = 0;
-   for(int i = 0; i < k; i++){
+   for(unsigned int i = 0; i < k; i++){
       if(operation(lfsr) == 1)
          var = var * 2 + 1;
       else
@@ -149,3 +173,17 @@ int generation(LFSR *lfsr, unsigned short k){
    }
    return var;
 }
+
+/*int reverse_generation(LFSR *lfsr, unsigned int k){
+      assert(lfsr != NULL && k > 0);
+
+   int var = generation(lfsr, k);
+   while(k > 0){
+      if(reverse_operation(lfsr) == 0)
+         var = (var-1)/2;
+      else
+         var /= 2;
+      k--;
+   }
+   return var;
+}*/

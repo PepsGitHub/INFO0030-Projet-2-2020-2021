@@ -5,7 +5,7 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * \author: Dumoulin Peissone S193957
- * \date: 09/03/21
+ * \date: 10/03/21
  * \projet: INFO0030 Projet 2
  */
 
@@ -43,10 +43,10 @@ typedef struct LFSR_t LFSR;
  *    lfsr Succès
  *    NULL Erreur lors de l'allocation dynamique
  */
-LFSR *create_lfsr(unsigned short N, char *seed, unsigned short tap);
+LFSR *create_lfsr(unsigned int N, char *seed, unsigned int tap);
 
 /**
- * \fn unsigned short get_N(LFSR *lfsr)
+ * \fn unsigned int get_N(LFSR *lfsr)
  * \brief Accesseur en lecture pour le champ N de *lfsr
  * 
  * \param lfsr un pointeur sur LFSR
@@ -57,7 +57,7 @@ LFSR *create_lfsr(unsigned short N, char *seed, unsigned short tap);
  * \return:
  *    lfsr->N Succès
  */
-unsigned short get_N(LFSR *lfsr);
+unsigned int get_N(LFSR *lfsr);
 
 /**
  * \fn char *get_seed(LFSR *lfsr)
@@ -74,7 +74,7 @@ unsigned short get_N(LFSR *lfsr);
 char *get_seed(LFSR *lfsr);
 
 /**
- * \fn unsigned short get_tap(LFSR *lfsr)
+ * \fn unsigned int get_tap(LFSR *lfsr)
  * \brief Accesseur en lecture pour le champ tap de *lfsr
  * 
  * \param lfsr un pointeur sur LFSR
@@ -85,10 +85,10 @@ char *get_seed(LFSR *lfsr);
  * \return:
  *    lfsr->tap Succès
  */
-unsigned short get_tap(LFSR *lfsr);
+unsigned int get_tap(LFSR *lfsr);
 
 /**
- * \fn LFSR *set_N(LFSR *lfsr, unsigned short N)
+ * \fn LFSR *set_N(LFSR *lfsr, unsigned int N)
  * \brief Accesseur en écriture pour le champ N de *lfsr
  * 
  * \param lfsr un pointeur sur LFSR
@@ -100,7 +100,7 @@ unsigned short get_tap(LFSR *lfsr);
  * \return:
  *    lfsr Succès
  */
-LFSR *set_N(LFSR *lfsr, unsigned short N);
+LFSR *set_N(LFSR *lfsr, unsigned int N);
 
 /**
  * \fn LFSR *set_seed(LFSR *lfsr, char *seed)
@@ -118,7 +118,7 @@ LFSR *set_N(LFSR *lfsr, unsigned short N);
 LFSR *set_seed(LFSR *lfsr, char *seed);
 
 /**
- * \fn LFSR *set_tap(LFSR *lfsr, unsigned short tap)
+ * \fn LFSR *set_tap(LFSR *lfsr, unsigned int tap)
  * \brief Accesseur en écriture pour le champ tap de *lfsr
  * 
  * \param lfsr un pointeur sur LFSR
@@ -130,10 +130,10 @@ LFSR *set_seed(LFSR *lfsr, char *seed);
  * \return:
  *    lfsr Succès
  */
-LFSR *set_tap(LFSR *lfsr, unsigned short tap);
+LFSR *set_tap(LFSR *lfsr, unsigned int tap);
 
 /**
- * \fn LFSR *initialisation(char *seed, unsigned short tap)
+ * \fn LFSR *initialisation(char *seed, unsigned int tap)
  * \brief Crée un LFSR et remplit ses champs
  * 
  * \param seed la séquence de bits initiale du registre
@@ -145,7 +145,7 @@ LFSR *set_tap(LFSR *lfsr, unsigned short tap);
  * \return:
  *    lfsr Succès
  */
-LFSR *initialisation(char *seed, unsigned short tap);
+LFSR *initialisation(char *seed, unsigned int tap);
 
 /**
  * \fn int operation(LFSR *lfsr)
@@ -161,8 +161,9 @@ LFSR *initialisation(char *seed, unsigned short tap);
  */
 int operation(LFSR *lfsr);
 
+int reverse_operation(LFSR *lfsr);
 /**
- * \fn int generation(LFSR *lfsr, unsigned short k)
+ * \fn int generation(LFSR *lfsr, unsigned int k)
  * \brief Réalise k opérations sur le registre
  * 
  * \param lfsr un pointeur sur LFSR
@@ -174,7 +175,9 @@ int operation(LFSR *lfsr);
  * \return:
  *    var Une valeur entière représentant les k bits générés par chaque étape
  */
-int generation(LFSR *lfsr, unsigned short k);
+int generation(LFSR *lfsr, unsigned int k);
+
+int reverse_generation(LFSR *lfsr, unsigned int k);
 
 /**
  * \fn char *string(LFSR *lfsr)
@@ -191,7 +194,7 @@ int generation(LFSR *lfsr, unsigned short k);
 char *string(LFSR *lfsr);
 
 /**
- * \fn void destroy_lfsr(LFSR *lfsr, unsigned short allocation_value)
+ * \fn void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value)
  * \brief Libère la mémoire en fonction de l'allocation
  * \param lfsr un pointeur sur LFSR
  * \param allocation_value le nombre de "couches" d'allocations
@@ -202,6 +205,6 @@ char *string(LFSR *lfsr);
  * \return:
  *    /
  */
-void destroy_lfsr(LFSR *lfsr, unsigned short allocation_value);
+void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value);
 
 #endif // __lfsr__

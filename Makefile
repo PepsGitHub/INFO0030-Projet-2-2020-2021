@@ -13,25 +13,31 @@ LD=gcc
 LDFLAGS=
 
 # Files
-EXEC=output
-MODULES=lfsr-test.c lfsr.c seatest.c
-OBJECTS=lfsr-test.o lfsr.o seatest.o
+EXEC=basic_cipher
+MODULES=main.c pnm.c lfsr.c verify.c chiffrement.c
+OBJECTS=main.o pnm.o lfsr.o verify.o chiffrement.o
 
 ## Rules
 
 all: $(EXEC)
 
-output: $(OBJECTS)
+basic_cipher: $(OBJECTS)
 	$(LD) -o $(EXEC) $(OBJECTS) $(LDFLAGS)
 
-lfsr-test.o: lfsr-test.c
-	$(CC) -c lfsr-test.c -o lfsr-test.o $(CFLAGS)
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+pnm.o: pnm.c
+	$(CC) -c pnm.c -o pnm.o $(CFLAGS)
 
 lfsr.o: lfsr.c
 	$(CC) -c lfsr.c -o lfsr.o $(CFLAGS)
 
-seatest.o: seatest.c
-	$(CC) -c seatest.c -o seatest.o $(CFLAGS)
+verify.o: verify.c
+	$(CC) -c verify.c -o verify.o $(CFLAGS)
+
+chiffrement.o: chiffrement.c
+	$(CC) -c chiffrement.c -o chiffrement.o $(CFLAGS)
 
 clean:
 	rm -f *.o $(EXEC) *~

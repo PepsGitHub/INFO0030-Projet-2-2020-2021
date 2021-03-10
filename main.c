@@ -5,9 +5,10 @@
  * de fichiers pnm.
  *
  * @author: Dumoulin Peissone S193957
- * @date: 05/03/21
- * @projet: INFO0030 Projet 1
+ * @date: 10/03/21
+ * @projet: INFO0030 Projet 2
  */
+#define STRING_SIZE 100
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,21 +20,19 @@
 
 #include "pnm.h"
 #include "lfsr.h"
+#include "verify.h"
+#include "chiffrement.h"
 
 
 int main(int argc, char *argv[]) {
 
-   char *format = NULL, *input = NULL, *output = NULL;
+   char *input = NULL, *output = NULL, *seed = NULL, *tap = NULL;
    PNM *image;
 
-   char *optstring = ":f:i:o:";
+   char *optstring = ":i:o:s:t:";
    int val;
    while((val=getopt(argc, argv, optstring))!=EOF){
-      switch (val){
-      case 'f':
-         format = optarg;
-         printf("format: %s\n", format);
-         break;
+      switch(val){
       case 'i':
          input = optarg;
          printf("input: %s\n", input);
@@ -41,6 +40,14 @@ int main(int argc, char *argv[]) {
       case 'o':
          output = optarg;
          printf("output: %s\n", output);
+         break;
+      case 's':
+         seed = optarg;
+         printf("seed: %s\n", seed);
+         break;
+      case 't':
+         tap = optarg;
+         printf("tap: %s\n", tap);
          break;
       case '?':
          printf("option inconnue: %c\n", optopt);
@@ -50,35 +57,53 @@ int main(int argc, char *argv[]) {
          return -2;
       }
    }
+
+   char inputX[STRING_SIZE] = "x", outputX[STRING_SIZE] = "x";
+   strcat(inputX, input);
+   strcat(outputX, output);
    
-   //appel de load_pnm et checking des valeurs de retour
-   switch(load_pnm(&image, input)){
-      case 0:
-         printf("Tout s'est bien passé et l'image est ");
-         printf("correctement chargée en mémoire dans *image\n");
-         break;
-      case -1:
-         printf("Il est impossible d'allouer suffisamment ");
-         printf("de mémoire pour l'image\n");
-         return 0;
-      case -2:
-         printf("Le nom du fichier en input est mal formé\n");
-         destroy(image, 2);
-         return 0;
-      case -3:
-         printf("Le contenu du fichier en input est mal formé\n");
-         return 0;
-      default:
-         printf("Valeur de retour inconnue\n");
-         return 0;
+   if(strcmp(outputX, input) != 0){
+      //appel de load_pnm et checking des valeurs de retour
+      switch(load_pnm(&image, input)){
+         case 0:
+            printf("Tout s'est bien passé et l'image est ");
+            printf("correctement chargée en mémoire dans *image\n");
+            break;
+         case -1:
+            printf("Il est impossible d'allouer suffisamment ");
+            printf("de mémoire pour l'image\n");
+            return 0;
+         case -2:
+            printf("Le nom du fichier en input est mal formé\n");
+            destroy(image, 2);
+            return 0;
+         case -3:
+            printf("Le contenu du fichier en input est mal formé\n");
+            return 0;
+         default:
+            printf("Valeur de retour inconnue\n");
+            return 0;
+      }
+   }else{
+      load_pnm(&image, output);
+      write_pnm(image, input);
+      destroy(image, 2);
+
+      return 0;
    }
 
-   //permet de gérer les erreurs entre le format du fichier et le format
-   if(manage_format_input(image, format, input))
-      return -1;
-   //permet de gérer les caractères interdits dans l'output
+ //permet de gérer les caractères interdits dans l'output
    if(verify_output(image, output))
       return -1;
+
+   //permet de gérer les caractères autres que 0 et 1 dans la graine
+   if(verify_seed(image, seed))
+      return -1;
+
+   /*
+   //permet de gérer les caractères autres que les chiffres dans le tap
+   if(verify_tap(image, tap))
+      return -1;*/
 
    //appel de write_pnm et checking des valeurs de retour
    switch(write_pnm(image, output)){
@@ -98,6 +123,9 @@ int main(int argc, char *argv[]) {
          return 0;
    }
 
+   if(strcmp(inputX, output) == 0)
+      transform(image, output, seed, tap);
+   
    //libération de la mémoire
    
    destroy(image, 2);

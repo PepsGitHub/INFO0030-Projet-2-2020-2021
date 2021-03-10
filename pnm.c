@@ -5,8 +5,8 @@
  * les fonctions de manipulation d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 05/03/21
- * @projet: INFO0030 Projet 1
+ * @date: 10/03/21
+ * @projet: INFO0030 Projet 2
  */
 
 #define TRIPLET 3
@@ -18,7 +18,9 @@
 #include <getopt.h>
 
 #include "pnm.h"
-
+#include "lfsr.h"
+#include "verify.h"
+#include "chiffrement.h"
 
 /**
  * Définition du type opaque PNM
@@ -27,10 +29,10 @@
 struct PNM_t {
    char magicNumber[2]; /*Nombre qui caractérise le type de fichier
                       (1 pour pbm, 2 pour pgm, 3 pour ppm)*/
-   unsigned short columns; //Nombre de pixels de hauteur
-   unsigned short rows; //Nombre de pixels de largeur
-   unsigned short maxValuePixel; //Valeur maximale que peut prendre un pixel
-   unsigned short *matrix; //Matrice contenant la valeur de chaque pixel de l'image
+   unsigned int columns; //Nombre de pixels de hauteur
+   unsigned int rows; //Nombre de pixels de largeur
+   unsigned int maxValuePixel; //Valeur maximale que peut prendre un pixel
+   unsigned int *matrix; //Matrice contenant la valeur de chaque pixel de l'image
 };
 
 //debut constructeur
@@ -49,25 +51,25 @@ char *get_magicNumber(PNM *image){
    return image->magicNumber;
 }
 
-unsigned short get_columns(PNM *image){
+unsigned int get_columns(PNM *image){
    assert(image!=NULL);
 
    return image->columns;
 }
 
-unsigned short get_rows(PNM *image){
+unsigned int get_rows(PNM *image){
    assert(image!=NULL);
 
    return image->rows;
 }
 
-unsigned short get_maxValuePixel(PNM *image){
+unsigned int get_maxValuePixel(PNM *image){
    assert(image!=NULL);
 
    return image->maxValuePixel;
 }
 
-unsigned short *get_matrix(PNM *image){
+unsigned int *get_matrix(PNM *image){
    assert(image!=NULL);
 
    return image->matrix;
@@ -84,7 +86,7 @@ PNM *set_magicNumber(PNM *image, char *magicNumber){
    return image;
 }
 
-PNM *set_columns(PNM *image, unsigned short columns){
+PNM *set_columns(PNM *image, unsigned int columns){
    assert(image!=NULL);
 
    image->columns = columns;
@@ -92,7 +94,7 @@ PNM *set_columns(PNM *image, unsigned short columns){
    return image;
 }
 
-PNM *set_rows(PNM *image, unsigned short rows){
+PNM *set_rows(PNM *image, unsigned int rows){
    assert(image!=NULL);
 
    image->rows = rows;
@@ -100,7 +102,7 @@ PNM *set_rows(PNM *image, unsigned short rows){
    return image;
 }
 
-PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel){
+PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel){
    assert(image!=NULL);
 
    image->maxValuePixel = maxValuePixel;
@@ -108,7 +110,7 @@ PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel){
    return image;
 }
 
-PNM *set_matrix(PNM *image, unsigned short *matrix){
+PNM *set_matrix(PNM *image, unsigned int *matrix){
    assert(image!=NULL);
 
    image->matrix = matrix;
@@ -122,10 +124,10 @@ int create_matrix(PNM *image){
 
    if(get_magicNumber(image)[1] == '3'){
       image->matrix = malloc(image->columns * image->rows * TRIPLET * 
-                             sizeof(unsigned short));
+                             sizeof(unsigned int));
    }else{
       image->matrix = malloc(image->columns * image->rows *
-                             sizeof(unsigned short));
+                             sizeof(unsigned int));
    }
    if(!image->matrix)
       return -1;
@@ -140,18 +142,19 @@ int load_matrix(PNM *image, FILE *fp){
    switch(get_magicNumber(image)[1]){
    case '1':
    case '2':
-      for(int i = 0; i < get_rows(image) * get_columns(image); i++){
+      for(unsigned int i = 0; i < get_rows(image) * get_columns(image); i++){
             manage_comments(fp);
-            if(fscanf(fp,"%hu ", &(image->matrix[i])) == EOF)
+            if(fscanf(fp,"%u ", &(image->matrix[i])) == EOF)
                return -3;
          }
       break;
    case '3':
-      for(int i = 0; i < get_rows(image) * get_columns(image) * TRIPLET; i++){
-            manage_comments(fp);
-            if(fscanf(fp,"%hu ", &(image->matrix[i])) == EOF)
-               return -3;
-         }
+      for(unsigned int i = 0; i < get_rows(image) * get_columns(image) *
+      TRIPLET; i++){
+         manage_comments(fp);
+         if(fscanf(fp,"%u ", &(image->matrix[i])) == EOF)
+            return -3;
+      }
       break;
    default:
       return -3;
@@ -165,20 +168,21 @@ int write_matrix(PNM *image, FILE *fp){
 
    switch(get_magicNumber(image)[1]){
    case '1' :
-      for(int i=0;i<get_rows(image) * get_columns(image);i++){
-         fprintf(fp,"%hu ", image->matrix[i]);
+      for(unsigned int i=0;i<get_rows(image) * get_columns(image);i++){
+         fprintf(fp,"%u ", image->matrix[i]);
       }
       break;
    case '2' :
       fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(int i=0;i<get_rows(image) * get_columns(image);i++){
-         fprintf(fp,"%hu ", image->matrix[i]);
+      for(unsigned int i=0;i<get_rows(image) * get_columns(image);i++){
+         fprintf(fp,"%u ", image->matrix[i]);
       }
       break;
    case '3' :
       fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(int i=0;i<get_rows(image) * get_columns(image) * TRIPLET;i++){
-         fprintf(fp,"%hu ", image->matrix[i]);
+      for(unsigned int i=0;i<get_rows(image) * get_columns(image) * TRIPLET;
+      i++){
+         fprintf(fp,"%u ", image->matrix[i]);
       }
       break;
    default :
@@ -189,7 +193,7 @@ int write_matrix(PNM *image, FILE *fp){
 }//fin write_matrix
 
 //debut destroy
-void destroy(PNM *image, unsigned short allocation_value){
+void destroy(PNM *image, unsigned int allocation_value){
    assert(image != NULL && allocation_value > 0 && allocation_value < 4);
    switch (allocation_value){
    case 1://détruit pnm
@@ -201,94 +205,6 @@ void destroy(PNM *image, unsigned short allocation_value){
       break;
    }
 }//fin destroy
-
-//debut manage_format_input
-int manage_format_input(PNM *image, char *format, char *input){
-   assert(image != NULL && format != NULL && input != NULL);
-
-   switch (get_magicNumber(image)[1]){
-   case '1':
-      if(strcmp(format, "PBM")){
-         printf("Mauvais format passé en argument. ");
-         printf("Le fichier %s est du type PBM et non %s\n", input, format);
-         destroy(image, 2);
-         return -1;
-      }else{
-         printf("Bon format passé en argument. ");
-         printf("Le fichier %s est bien du type PBM\n", input);
-         return 0;
-      }
-      break;
-   case '2':
-      if(strcmp(format, "PGM")){
-         printf("Mauvais format passé en argument. ");
-         printf("Le fichier %s est du type PGM et non %s\n", input, format);
-         destroy(image, 2);
-         return -1;
-      }else{
-         printf("Bon format passé en argument. ");
-         printf("Le fichier %s est bien du type PGM\n", input);
-         return 0;
-      }
-      break;
-   case '3':
-      if(strcmp(format, "PPM")){
-         printf("Mauvais format passé en argument. ");
-         printf("Le fichier %s est du type PPM et non %s\n", input, format);
-         destroy(image, 2);
-         return -1;
-      }else{
-         printf("Bon format passé en argument. ");
-         printf("Le fichier %s est bien du type PPM\n", input);
-         return 0;
-      }
-      break;
-   default:
-      printf("Incapable de lire ce type de format: %s\n", format);
-      return -1;
-      break;
-   }
-   return 0;
-}
-//fin manage_format_input
-
-//debut verify_filename_output
-int verify_output(PNM *image, char *output){
-   assert(image != NULL && output != NULL);
-
-   char *invalidCharacter = "/\\:*?\"<>|";
-
-   for(int i=0; output[i] != '\0';i++){
-      for(int j=0; invalidCharacter[j] != '\0'; j++){
-         if(output[i]==invalidCharacter[j]){
-            printf("Caractère invalide dans le nom du fichier: '%c'\n",
-                   output[i]);
-            destroy(image, 2);
-            return -1;
-         }
-      }
-   }
-   return 0;
-}//fin verify_filename
-
-//debut manage_comments
-int manage_comments(FILE *fp){
-   assert(fp != NULL);
-
-   int character = 0;
-
-   char special_character = '#';
-   while((character = fgetc(fp)) != EOF && (character == special_character)){
-      if(character == special_character)
-         fscanf(fp, "%*[^\n] ");
-   }
-
-   if(character == EOF)
-      return -1;
-   
-   ungetc(character, fp);
-   return 0;
-}//fin manage_comments
 
 //debut load_pnm
 int load_pnm(PNM **image, char* filename){
@@ -319,9 +235,9 @@ int load_pnm(PNM **image, char* filename){
 
    manage_comments(fp);
 
-   unsigned short columns = 0, rows = 0, maxValuePixel = 1;
+   unsigned int columns = 0, rows = 0, maxValuePixel = 1;
 
-   fscanf(fp, "%hu %hu\n", &columns, &rows);
+   fscanf(fp, "%u %u\n", &columns, &rows);
 
    if(columns < 1 || rows < 1){
       fclose(fp);
@@ -345,7 +261,7 @@ int load_pnm(PNM **image, char* filename){
       break;
    case '2' :
    case '3' :
-      fscanf(fp,"%hu\n", &maxValuePixel);
+      fscanf(fp,"%u\n", &maxValuePixel);
       set_maxValuePixel(*image, maxValuePixel);
       create_matrix(*image);
       if(load_matrix(*image, fp)){
