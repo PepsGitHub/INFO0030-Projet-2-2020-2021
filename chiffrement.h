@@ -60,4 +60,6 @@ int transform(PNM *image, char *filename, char *seed, char *tap);
 void reverse_transform(PNM *image, char *input, char *output, char *seed, 
 char *tap);
 
+unsigned int binary(unsigned int n);
+
 #endif // __chiffrement__

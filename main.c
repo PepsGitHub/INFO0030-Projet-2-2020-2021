@@ -110,12 +110,6 @@ int main(int argc, char *argv[]) {
       return -1;
    }
 
-   //permet de chiffrer l'image si besoin
-   if(strcmp(inputX, output) == 0){
-      transform(image, output, seed, tap);
-      return 0;
-   }
-
    //permet de déchiffrer l'image si besoin
    if(strcmp(outputX, input) == 0){
       reverse_transform(image, input, output, seed, tap);
@@ -138,6 +132,12 @@ int main(int argc, char *argv[]) {
       default:
          printf("Valeur de retour inconnue\n");
          return 0;
+   }
+
+   //permet de chiffrer l'image si besoin
+   if(strcmp(inputX, output) == 0){
+      transform(image, output, seed, tap);
+      return 0;
    }
    
    //libération de la mémoire
