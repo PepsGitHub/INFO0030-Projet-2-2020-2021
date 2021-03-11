@@ -160,8 +160,6 @@ LFSR *initialisation(char *seed, unsigned int tap);
  *    bit Le dernier caractère du registre après l'opération (0 ou 1)
  */
 int operation(LFSR *lfsr);
-
-int reverse_operation(LFSR *lfsr);
 /**
  * \fn int generation(LFSR *lfsr, unsigned int k)
  * \brief Réalise k opérations sur le registre
@@ -176,8 +174,6 @@ int reverse_operation(LFSR *lfsr);
  *    var Une valeur entière représentant les k bits générés par chaque étape
  */
 int generation(LFSR *lfsr, unsigned int k);
-
-int reverse_generation(LFSR *lfsr, unsigned int k);
 
 /**
  * \fn char *string(LFSR *lfsr)

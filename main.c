@@ -84,26 +84,43 @@ int main(int argc, char *argv[]) {
             printf("Valeur de retour inconnue\n");
             return 0;
       }
-   }else{
-      load_pnm(&image, output);
-      write_pnm(image, input);
-      destroy(image, 2);
-
-      return 0;
    }
 
  //permet de gérer les caractères interdits dans l'output
-   if(verify_output(image, output))
+   if(verify_output(output)){
+      destroy(image, 2);
+      printf("Le nom du fichier output passé en argument ");
+      printf("n'est pas valide\n");
       return -1;
+   }
 
    //permet de gérer les caractères autres que 0 et 1 dans la graine
-   if(verify_seed(image, seed))
+   if(verify_seed(seed)){
+      destroy(image, 2);
+      printf("La graine passée en argument ");
+      printf("n'est pas valide\n");
       return -1;
+   }
 
-   /*
-   //permet de gérer les caractères autres que les chiffres dans le tap
-   if(verify_tap(image, tap))
-      return -1;*/
+   //permet de gérer que tap est la représentation d'un nombre
+   if(verify_tap(tap)){
+      destroy(image, 2);
+      printf("Le tap passé en argument ");
+      printf("n'est pas valide\n");
+      return -1;
+   }
+
+   //permet de chiffrer l'image si besoin
+   if(strcmp(inputX, output) == 0){
+      transform(image, output, seed, tap);
+      return 0;
+   }
+
+   //permet de déchiffrer l'image si besoin
+   if(strcmp(outputX, input) == 0){
+      reverse_transform(image, input, output, seed, tap);
+      return 0;
+   }
 
    //appel de write_pnm et checking des valeurs de retour
    switch(write_pnm(image, output)){
@@ -122,9 +139,6 @@ int main(int argc, char *argv[]) {
          printf("Valeur de retour inconnue\n");
          return 0;
    }
-
-   if(strcmp(inputX, output) == 0)
-      transform(image, output, seed, tap);
    
    //libération de la mémoire
    

@@ -98,6 +98,7 @@ void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value){
    }
 }//fin destroy
 
+//debut initialisation
 LFSR *initialisation(char *seed, unsigned int tap){
    assert(seed != NULL && tap > 0 && tap < strlen(seed));
 
@@ -105,8 +106,9 @@ LFSR *initialisation(char *seed, unsigned int tap){
    LFSR *lfsr = create_lfsr(N, seed, tap);
 
    return lfsr;
-}
+}//fin initialisation
 
+//debut operation
 int operation(LFSR *lfsr){
    assert(lfsr != NULL);
 
@@ -128,39 +130,18 @@ int operation(LFSR *lfsr){
       bit = 0;
       return bit;
    }
-}
+}//fin operation
 
-/*int reverse_operation(LFSR *lfsr){
-   assert(lfsr != NULL);
-
-   char *stateRegister = get_seed(lfsr);
-   unsigned int indexTap = get_N(lfsr) - get_tap(lfsr) - 2;
-
-   char lastChar = stateRegister[get_N(lfsr) - 1], tapChar = stateRegister[indexTap];
-   int bit = 0;
-   for(unsigned int i = 0; i < get_N(lfsr) - 1; i++){
-      stateRegister[i+1] = stateRegister[i];
-   }
-
-   if(lastChar == tapChar){
-      stateRegister[0] = '0';
-      bit = 0;
-      return bit;
-   }else{
-      stateRegister[0] = '1';
-      bit = 1;
-      return bit;
-   }
-}*/
-
+//debut string
 char *string(LFSR *lfsr){
    assert(lfsr != NULL);
 
    char *state_register = get_seed(lfsr);
 
    return state_register;
-}
+}//fin string
 
+//debut generation
 int generation(LFSR *lfsr, unsigned int k){
    assert(lfsr != NULL && k > 0);
 
@@ -172,18 +153,4 @@ int generation(LFSR *lfsr, unsigned int k){
          var *= 2;
    }
    return var;
-}
-
-/*int reverse_generation(LFSR *lfsr, unsigned int k){
-      assert(lfsr != NULL && k > 0);
-
-   int var = generation(lfsr, k);
-   while(k > 0){
-      if(reverse_operation(lfsr) == 0)
-         var = (var-1)/2;
-      else
-         var /= 2;
-      k--;
-   }
-   return var;
-}*/
+}//fin generation

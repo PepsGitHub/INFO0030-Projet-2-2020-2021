@@ -70,8 +70,8 @@ int manage_format_input(PNM *image, char *format, char *input){
 //fin manage_format_input
 
 //debut verify_filename_output
-int verify_output(PNM *image, char *output){
-   assert(image != NULL && output != NULL);
+int verify_output(char *output){
+   assert(output != NULL);
 
    char *invalidCharacter = "/\\:*?\"<>|";
 
@@ -80,7 +80,6 @@ int verify_output(PNM *image, char *output){
          if(output[i]==invalidCharacter[j]){
             printf("Caractère invalide dans le nom du fichier: '%c'\n",
                    output[i]);
-            destroy(image, 2);
             return -1;
          }
       }
@@ -108,13 +107,12 @@ int manage_comments(FILE *fp){
 }//fin manage_comments
 
 //debut_verify_seed()
-int verify_seed(PNM *image, char *seed){
-   assert(image != NULL && seed != NULL);
+int verify_seed(char *seed){
+   assert(seed != NULL);
 
    for(int i = 0; seed[i] != '\0'; i++){
       if(seed[i] != '0' && seed[i] != '1'){
          printf("Charactère invalide dans la graine: '%c'\n", seed[i]);
-         destroy(image, 2);
          return -1;
       }
    }
@@ -122,9 +120,12 @@ int verify_seed(PNM *image, char *seed){
 }//fin verify_seed()
 
 //debut verify_tap()
-int verify_tap(PNM *image, char *tap){
-   assert(image != NULL && tap != NULL);
+int verify_tap(char *tap){
+   assert(tap != NULL);
 
-   //char *validCharacter = "0123456789";
+   if(atoi(tap) == 0){
+      return -1;
+   }
+
    return 0;
 }//fin verify_tap()

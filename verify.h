@@ -59,13 +59,12 @@ int manage_comments(FILE *fp);
 int manage_format_input(PNM *image, char *format, char *input);
 
 /**
- * \fn int verify_output(PNM *image, char *output)
+ * \fn int verify_output(char *output)
  * \brief Vérifie si l'output contient des caractères spéciaux interdits
  * 
- * \param image un pointeur sur PNM
  * \param output le nom du fichier en sortie
  * 
- * \pre: image != NULL, output != NULL
+ * \pre: output != NULL
  * \post: output géré correctement
  * 
  * \return:
@@ -73,38 +72,37 @@ int manage_format_input(PNM *image, char *format, char *input);
  *    -1 Caractère invalide dans le nom du fichier
  */
 
-int verify_output(PNM *image, char *output);
+int verify_output(char *output);
 
 /**
- * \fn verify_seed(PNM *image, char *seed)
+ * \fn verify_seed(char *seed)
  * \brief Vérifie si la graine contient autre chose que des 0 ou des 1
  * 
- * \param image un pointeur sur PNM
  * \param seed une chaine de caractères représentant la graine
  * 
- * \pre: image != NULL, seed != NULL
+ * \pre: seed != NULL
  * \post: seed géré correctement
  * 
  * \return:
  *    0 Succès
  *    -1 Caractère invalide dans la graine
  */
-int verify_seed(PNM *image, char *seed);
+int verify_seed(char *seed);
 
 /**
- * \fn verify_tap(PNM *image, char *tap)
+ * \fn verify_tap(char *tap)
  * \brief Vérifie si le tap contient autre chose que des 0 ou des 1
  * 
  * \param image un pointeur sur PNM
  * \param tap une chaine de caractères représentant le tap
  * 
- * \pre: image != NULL, tap != NULL
+ * \pre: tap != NULL
  * \post: tap géré correctement
  * 
  * \return:
  *    0 Succès
  *    -1 Caractère invalide dans le tap
  */
-int verify_tap(PNM *image, char *tap);
+int verify_tap(char *tap);
 
 #endif // __verify__
