@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
 
    char *input = NULL, *output = NULL, *seed = NULL, *tap = NULL, *password = NULL;
    PNM *image;
-   LFSR *lfsr;
 
    char *optstring = ":i:o:s:t:p:";
    int val;
@@ -64,10 +63,13 @@ int main(int argc, char *argv[]) {
    }
 
    char inputX[STRING_SIZE] = "x", outputX[STRING_SIZE] = "x";
+   char inputX2[STRING_SIZE] = "x-advanced", outputX2[STRING_SIZE] = "x-advanced";
    strcat(inputX, input);
    strcat(outputX, output);
+   strcat(inputX2, input);
+   strcat(outputX2, output);
 
-   if(strcmp(outputX, input) != 0){
+   if(strcmp(outputX, input) != 0 && strcmp(outputX2, input) != 0){
       //appel de load_pnm et checking des valeurs de retour
       switch(load_pnm(&image, input)){
          case 0:
@@ -99,14 +101,15 @@ int main(int argc, char *argv[]) {
       return -1;
    }
 
-   /*
    //permet de gérer les caractères autres que 0 et 1 dans la graine
-   if(verify_seed(seed)){
-      destroy(image, 3);
-      printf("La graine passée en argument ");
-      printf("n'est pas valide\n");
-      return -1;
-   }*/
+   if(seed != NULL){
+      if(verify_seed(seed)){
+         destroy(image, 3);
+         printf("La graine passée en argument ");
+         printf("n'est pas valide\n");
+         return -1;
+      }
+   }
 
    //permet de gérer que tap est la représentation d'un nombre
    if(verify_tap(tap)){
@@ -117,20 +120,31 @@ int main(int argc, char *argv[]) {
    }
 
    //permet de gérer que le mot de passe est correct
-   if(verify_password(password)){
-      destroy(image, 3);
-      printf("Le mot de passe en argument ");
-      printf("n'est pas valide\n");
-      return -1;
+   if(password != NULL){
+      if(verify_password(password)){
+         destroy(image, 3);
+         printf("Le mot de passe en argument ");
+         printf("n'est pas valide\n");
+         return -1;
+      }
    }
 
-   lfsr = initialize_password(password, tap);
+   if(password != NULL){
+      char *final = (char *) malloc((sizeof(char) * strlen(password) * 6) + 1);
+      seed = initialize_password(password, final);
+      free(final);
+   }
+
+   printf("%d\n", strcmp(inputX, output));
+   printf("%d\n", strcmp(inputX2, output));
+   printf("%d\n", strcmp(outputX, input));
+   printf("%d\n", strcmp(outputX2, input));
 
    unsigned k = 32;
    //permet de chiffrer/déchiffrer l'image si besoin
-   if(strcmp(inputX, output) == 0)
+   if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0)
       transform(image, seed, tap, k);
-   else if(strcmp(outputX, input) == 0){
+   else if(strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0){
       load_pnm(&image, input);
       transform(image, seed, tap, k);
       write_pnm(image, output);
@@ -154,7 +168,9 @@ int main(int argc, char *argv[]) {
          printf("Valeur de retour inconnue\n");
          return 0;
    }
-   destroy_lfsr(lfsr, 1);
+   if(password != NULL){
+      //free(seed);
+   }
    destroy(image, 3);
    
    return 0;

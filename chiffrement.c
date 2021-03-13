@@ -35,12 +35,12 @@ int transform(PNM *image, char *seed, char *tap, unsigned k){
    return 0;
 }
 
-LFSR *initialize_password(char *password, char *tap){
+char *initialize_password(char *password, char *final){
    assert(password != NULL);
 
    char *base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
    int nombre = 0, binar = 0;
-   char b[100] = "", buffer[30];
+   char b[100] = "", buffer[7];
 
    for(int i = 0; password[i] != '\0'; i++){
       for(int j = 0; base64[j] != '\0'; j++){
@@ -48,14 +48,22 @@ LFSR *initialize_password(char *password, char *tap){
             nombre = j;
             binar = binary(nombre);
             sprintf(buffer, "%d", binar);
+            for(int k = 0; k < 6; k++){
+               if(buffer[k] == '\0'){
+                  buffer[k+1] = '\0';
+                  for(int l = k; l > 0; l--)
+                     buffer[l] = buffer[l-1];
+                  buffer[0] = '0';
+               }
+            }
             strcat(b, buffer);
          }
       }
    }
-   printf("%s\n", b);
-   LFSR *lfsr = initialize(buffer, (unsigned)atoi(tap));
+   strcpy(final, b);
+   printf("seed: %s\n", final);
 
-   return lfsr;
+   return final;
 }
 
 int binary(int k){

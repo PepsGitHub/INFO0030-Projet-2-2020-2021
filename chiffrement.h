@@ -41,7 +41,7 @@
  */
 int transform(PNM *image, char *seed, char *tap, unsigned k);
 
-LFSR *initialize_password(char *password, char *tap);
+char *initialize_password(char *password, char *final);
 
 int binary(int k);
 
