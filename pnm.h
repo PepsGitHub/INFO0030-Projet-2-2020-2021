@@ -156,7 +156,7 @@ unsigned int get_maxValuePixel(PNM *image);
  *    image->matrix Succès
  */
 
-unsigned int *get_matrix(PNM *image);
+unsigned int **get_matrix(PNM *image);
 
 /**
  * \fn PNM *set_magicNumber(PNM *image, char *magicNumber)
@@ -237,7 +237,7 @@ PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel);
  *    image Succès
  */
 
-PNM *set_matrix(PNM *image, unsigned int *matrix);
+PNM *set_matrix(PNM *image, unsigned int **matrix);
 
 /**
  * \fn int create_matrix(PNM *image)

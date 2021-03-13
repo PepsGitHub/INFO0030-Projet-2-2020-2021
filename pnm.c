@@ -32,7 +32,7 @@ struct PNM_t {
    unsigned int columns; //Nombre de pixels de hauteur
    unsigned int rows; //Nombre de pixels de largeur
    unsigned int maxValuePixel; //Valeur maximale que peut prendre un pixel
-   unsigned int *matrix; //Matrice contenant la valeur de chaque pixel de l'image
+   unsigned int **matrix; //Matrice contenant la valeur de chaque pixel de l'image
 };
 
 //debut constructeur
@@ -69,7 +69,7 @@ unsigned int get_maxValuePixel(PNM *image){
    return image->maxValuePixel;
 }
 
-unsigned int *get_matrix(PNM *image){
+unsigned int **get_matrix(PNM *image){
    assert(image!=NULL);
 
    return image->matrix;
@@ -79,8 +79,8 @@ unsigned int *get_matrix(PNM *image){
 PNM *set_magicNumber(PNM *image, char *magicNumber){
    assert(image!=NULL);
 
-   image->magicNumber[0] = magicNumber[0];
-   image->magicNumber[1] = magicNumber[1];
+   for(unsigned i = 0; i < 2; i++)
+      image->magicNumber[i] = magicNumber[i];
    image->magicNumber[2] = '\0';
 
    return image;
@@ -110,7 +110,7 @@ PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel){
    return image;
 }
 
-PNM *set_matrix(PNM *image, unsigned int *matrix){
+PNM *set_matrix(PNM *image, unsigned int **matrix){
    assert(image!=NULL);
 
    image->matrix = matrix;
@@ -121,16 +121,31 @@ PNM *set_matrix(PNM *image, unsigned int *matrix){
 //debut create_matrix
 int create_matrix(PNM *image){
    assert(image != NULL);
+   image->matrix = malloc(image->rows * sizeof(unsigned int*));
+   if(!image->matrix){
+      destroy(image, 1);
+      return -1;
+   }
 
    if(get_magicNumber(image)[1] == '3'){
-      image->matrix = malloc(image->columns * image->rows * TRIPLET * 
-                             sizeof(unsigned int));
+      for(unsigned int i = 0;i < image->rows;i++){
+         image->matrix[i] = malloc(image->columns * TRIPLET * sizeof(unsigned int));
+
+         if(!image->matrix[i]){
+            destroy(image, 2);
+            return -1;
+         }
+      }
    }else{
-      image->matrix = malloc(image->columns * image->rows *
-                             sizeof(unsigned int));
+      for(unsigned int i = 0;i < image->rows;i++){
+         image->matrix[i] = malloc(image->columns * sizeof(unsigned int));
+
+         if(!image->matrix[i]){
+            destroy(image, 2);
+            return -1;
+         }
+      }
    }
-   if(!image->matrix)
-      return -1;
 
    return 0;
 }//fin create_matrix
@@ -142,21 +157,25 @@ int load_matrix(PNM *image, FILE *fp){
    switch(get_magicNumber(image)[1]){
    case '1':
    case '2':
-      for(unsigned int i = 0; i < get_rows(image) * get_columns(image); i++){
+      for(unsigned int i = 0; i < get_rows(image); i++){
+         for(unsigned int j = 0; j < get_columns(image); j++){
             manage_comments(fp);
-            if(fscanf(fp,"%u ", &(image->matrix[i])) == EOF)
-               return -3;
+            fscanf(fp,"%u ", &(image->matrix[i][j]));
          }
+         fscanf(fp, "\n");
+      }
       break;
    case '3':
-      for(unsigned int i = 0; i < get_rows(image) * get_columns(image) *
-      TRIPLET; i++){
-         manage_comments(fp);
-         if(fscanf(fp,"%u ", &(image->matrix[i])) == EOF)
-            return -3;
+      for(unsigned int i = 0; i < get_rows(image); i++){
+         for(unsigned int j = 0; j < 3 * get_columns(image); j++){
+            manage_comments(fp);
+            fscanf(fp,"%u ", &(image->matrix[i][j]));
+         }
+         fscanf(fp, "\n");
       }
       break;
    default:
+      destroy(image, 3);
       return -3;
    }
    return 0;
@@ -168,25 +187,33 @@ int write_matrix(PNM *image, FILE *fp){
 
    switch(get_magicNumber(image)[1]){
    case '1' :
-      for(unsigned int i=0;i<get_rows(image) * get_columns(image);i++){
-         fprintf(fp,"%u ", image->matrix[i]);
+      for(unsigned int i=0;i<get_rows(image);i++){
+         for(unsigned int j=0;j<get_columns(image);j++){
+            fprintf(fp,"%u ", image->matrix[i][j]);
+         }
+         fprintf(fp,"\n");
       }
       break;
    case '2' :
-      fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned int i=0;i<get_rows(image) * get_columns(image);i++){
-         fprintf(fp,"%u ", image->matrix[i]);
+      fprintf(fp, "%u\n", get_maxValuePixel(image));
+      for(unsigned int i=0;i<get_rows(image);i++){
+         for(unsigned int j=0;j<get_columns(image);j++){
+            fprintf(fp,"%u ", image->matrix[i][j]);
+         }
+         fprintf(fp,"\n");
       }
       break;
    case '3' :
-      fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned int i=0;i<get_rows(image) * get_columns(image) * TRIPLET;
-      i++){
-         fprintf(fp,"%u ", image->matrix[i]);
+      fprintf(fp, "%u\n", get_maxValuePixel(image));
+      for(unsigned int i=0;i<get_rows(image);i++){
+         for(unsigned int j=0;j<3*get_columns(image);j++){
+            fprintf(fp,"%u ", image->matrix[i][j]);
+         }
+         fprintf(fp,"\n");
       }
       break;
    default :
-      destroy(image, 2);
+      destroy(image, 3);
       return -2;
    }
    return 0;
@@ -203,6 +230,11 @@ void destroy(PNM *image, unsigned int allocation_value){
       free(image->matrix);
       free(image);
       break;
+   case 3:
+      for(unsigned int i = 0;i < image->rows;i++)
+         free(image->matrix[i]);
+      free(image->matrix);
+      free(image);
    }
 }//fin destroy
 
@@ -228,7 +260,7 @@ int load_pnm(PNM **image, char* filename){
       (!strcmp(magicNumber, "P3"))){
       set_magicNumber(*image, magicNumber);
    }else{
-      destroy(*image, 2);
+      destroy(*image, 3);
       fclose(fp);
       return -3;
    }
@@ -254,7 +286,7 @@ int load_pnm(PNM **image, char* filename){
       set_maxValuePixel(*image, maxValuePixel);
       create_matrix(*image);
       if(load_matrix(*image, fp)){
-         destroy(*image, 2);
+         destroy(*image, 3);
          fclose(fp);
          return -3;
       }
@@ -265,7 +297,7 @@ int load_pnm(PNM **image, char* filename){
       set_maxValuePixel(*image, maxValuePixel);
       create_matrix(*image);
       if(load_matrix(*image, fp)){
-         destroy(*image, 2);
+         destroy(*image, 3);
          fclose(fp);
          return -3;
       }
@@ -288,10 +320,13 @@ int write_pnm(PNM *image, char* filename) {
    if(!fp)
       return -1;
 
-   char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
+   /*char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
 
-   fprintf(fp,"%c%c\n%hu %hu\n", letter, number, 
+   fprintf(fp,"%c%c\n%u %u\n", letter, number, 
            get_columns(image), get_rows(image));
+   write_matrix(image, fp);*/
+   fprintf(fp,"%s\n%u %u\n", get_magicNumber(image), get_columns(image), get_rows(image));
+
    write_matrix(image, fp);
 
    fclose(fp);

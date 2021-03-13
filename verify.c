@@ -129,3 +129,17 @@ int verify_tap(char *tap){
 
    return 0;
 }//fin verify_tap()
+
+int verify_password(char *password){
+   assert(password != NULL);
+
+   char *base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+   for(int i = 0; password[i] != '\0'; i++){
+      for(int j = 0; password[i] != base64[j] && base64[j] != '\0'; j++){
+         if(j == 63)
+            return -1;
+      }
+   }
+   return 0;
+}

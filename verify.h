@@ -105,4 +105,6 @@ int verify_seed(char *seed);
  */
 int verify_tap(char *tap);
 
+int verify_password(char *password);
+
 #endif // __verify__

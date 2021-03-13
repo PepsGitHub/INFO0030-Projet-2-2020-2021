@@ -26,10 +26,11 @@
 
 int main(int argc, char *argv[]) {
 
-   char *input = NULL, *output = NULL, *seed = NULL, *tap = NULL;
+   char *input = NULL, *output = NULL, *seed = NULL, *tap = NULL, *password = NULL;
    PNM *image;
+   LFSR *lfsr;
 
-   char *optstring = ":i:o:s:t:";
+   char *optstring = ":i:o:s:t:p:";
    int val;
    while((val=getopt(argc, argv, optstring))!=EOF){
       switch(val){
@@ -49,6 +50,10 @@ int main(int argc, char *argv[]) {
          tap = optarg;
          printf("tap: %s\n", tap);
          break;
+      case 'p':
+         password = optarg;
+         printf("password: %s\n", password);
+         break;
       case '?':
          printf("option inconnue: %c\n", optopt);
          return -1;
@@ -61,7 +66,7 @@ int main(int argc, char *argv[]) {
    char inputX[STRING_SIZE] = "x", outputX[STRING_SIZE] = "x";
    strcat(inputX, input);
    strcat(outputX, output);
-   
+
    if(strcmp(outputX, input) != 0){
       //appel de load_pnm et checking des valeurs de retour
       switch(load_pnm(&image, input)){
@@ -75,7 +80,7 @@ int main(int argc, char *argv[]) {
             return 0;
          case -2:
             printf("Le nom du fichier en input est mal formé\n");
-            destroy(image, 2);
+            destroy(image, 3);
             return 0;
          case -3:
             printf("Le contenu du fichier en input est mal formé\n");
@@ -88,34 +93,50 @@ int main(int argc, char *argv[]) {
 
  //permet de gérer les caractères interdits dans l'output
    if(verify_output(output)){
-      destroy(image, 2);
+      destroy(image, 3);
       printf("Le nom du fichier output passé en argument ");
       printf("n'est pas valide\n");
       return -1;
    }
 
+   /*
    //permet de gérer les caractères autres que 0 et 1 dans la graine
    if(verify_seed(seed)){
-      destroy(image, 2);
+      destroy(image, 3);
       printf("La graine passée en argument ");
       printf("n'est pas valide\n");
       return -1;
-   }
+   }*/
 
    //permet de gérer que tap est la représentation d'un nombre
    if(verify_tap(tap)){
-      destroy(image, 2);
+      destroy(image, 3);
       printf("Le tap passé en argument ");
       printf("n'est pas valide\n");
       return -1;
    }
 
-   //permet de déchiffrer l'image si besoin
-   if(strcmp(outputX, input) == 0){
-      reverse_transform(image, input, output, seed, tap);
-      return 0;
+   //permet de gérer que le mot de passe est correct
+   if(verify_password(password)){
+      destroy(image, 3);
+      printf("Le mot de passe en argument ");
+      printf("n'est pas valide\n");
+      return -1;
    }
 
+   lfsr = initialize_password(password, tap);
+
+   unsigned k = 32;
+   //permet de chiffrer/déchiffrer l'image si besoin
+   if(strcmp(inputX, output) == 0)
+      transform(image, seed, tap, k);
+   else if(strcmp(outputX, input) == 0){
+      load_pnm(&image, input);
+      transform(image, seed, tap, k);
+      write_pnm(image, output);
+      destroy(image, 3);
+      return 0;
+   }
    //appel de write_pnm et checking des valeurs de retour
    switch(write_pnm(image, output)){
       case 0:
@@ -133,16 +154,8 @@ int main(int argc, char *argv[]) {
          printf("Valeur de retour inconnue\n");
          return 0;
    }
-
-   //permet de chiffrer l'image si besoin
-   if(strcmp(inputX, output) == 0){
-      transform(image, output, seed, tap);
-      return 0;
-   }
-   
-   //libération de la mémoire
-   
-   destroy(image, 2);
+   destroy_lfsr(lfsr, 1);
+   destroy(image, 3);
    
    return 0;
 }

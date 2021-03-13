@@ -133,7 +133,7 @@ LFSR *set_seed(LFSR *lfsr, char *seed);
 LFSR *set_tap(LFSR *lfsr, unsigned int tap);
 
 /**
- * \fn LFSR *initialisation(char *seed, unsigned int tap)
+ * \fn LFSR *initialize(char *seed, unsigned int tap)
  * \brief Crée un LFSR et remplit ses champs
  * 
  * \param seed la séquence de bits initiale du registre
@@ -145,10 +145,10 @@ LFSR *set_tap(LFSR *lfsr, unsigned int tap);
  * \return:
  *    lfsr Succès
  */
-LFSR *initialisation(char *seed, unsigned int tap);
+LFSR *initialize(char *seed, unsigned int tap);
 
 /**
- * \fn int operation(LFSR *lfsr)
+ * \fn int operate(LFSR *lfsr)
  * \brief Réalise une opération sur le registre
  * 
  * \param lfsr un pointeur sur LFSR
@@ -159,9 +159,9 @@ LFSR *initialisation(char *seed, unsigned int tap);
  * \return:
  *    bit Le dernier caractère du registre après l'opération (0 ou 1)
  */
-int operation(LFSR *lfsr);
+int operate(LFSR *lfsr);
 /**
- * \fn int generation(LFSR *lfsr, unsigned int k)
+ * \fn int generate(LFSR *lfsr, unsigned int k)
  * \brief Réalise k opérations sur le registre
  * 
  * \param lfsr un pointeur sur LFSR
@@ -173,7 +173,7 @@ int operation(LFSR *lfsr);
  * \return:
  *    var Une valeur entière représentant les k bits générés par chaque étape
  */
-int generation(LFSR *lfsr, unsigned int k);
+int generate(LFSR *lfsr, unsigned int k);
 
 /**
  * \fn char *string(LFSR *lfsr)

@@ -18,91 +18,51 @@
 #include "lfsr.h"
 #include "chiffrement.h"
 
-unsigned int binary(unsigned int n){
-   if(n == 0)
-      return 0;
-   else if(n == 1)
-      return 1;
-   else{
-      return (n % 2) + 10 * binary(n/2);
-   }
-}
+int transform(PNM *image, char *seed, char *tap, unsigned k){
+   assert(image != NULL && seed != NULL && tap != NULL);
 
-int transform(PNM *image, char *filename, char *seed, char *tap){
-   assert(image != NULL && filename != NULL && seed != NULL && tap != NULL);
+   LFSR *lfsr = initialize(seed, (unsigned int)atoi(tap));
 
-   FILE *fp = fopen(filename, "w");
-   if(!fp)
-      return -1;
+   unsigned int **matrix = get_matrix(image);
 
+   for(unsigned int i = 0; i < get_rows(image); i++)
+      for(unsigned int j = 0; j < get_columns(image); j++)
+         matrix[i][j] ^= generate(lfsr, k);
 
-   LFSR *lfsr = initialisation(seed, (unsigned int)atoi(tap));
-
-   generation(lfsr, 32);
-
-   char *test = (char*)malloc(sizeof(char) * get_N(lfsr));
-
-   for(unsigned int i = 0; i < get_N(lfsr); i++){
-      test[i] = string(lfsr)[i];
-   }
-   printf("test: %s\n", test);
-
-   char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
-   fprintf(fp,"%c%c\n%hu %hu\n", letter, number, 
-           get_columns(image), get_rows(image));
-
-   switch(get_magicNumber(image)[1]){
-   case '1' :
-      for(unsigned int i = 0; i < get_rows(image) * get_columns(image); i++){
-         fprintf(fp,"%u ", get_matrix(image)[i] ^ atoi(test));
-      }
-      break;
-   case '2' :
-      fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned int i = 0; i < get_rows(image) * get_columns(image); i++){
-         fprintf(fp,"%u ", binary(get_matrix(image)[i]) ^ atoi(test));
-      }
-      break;
-   case '3' :
-      fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned int i = 0; i < get_rows(image) * get_columns(image) * TRIPLET; i++){
-         fprintf(fp,"%u ", binary(get_matrix(image)[i]) ^ atoi(test));
-      }
-      break;
-   default :
-      destroy_lfsr(lfsr, 1);
-      destroy(image, 2);
-      return -2;
-   }
-
+   set_matrix(image, matrix);
    destroy_lfsr(lfsr, 1);
-   destroy(image, 2);
-   fclose(fp);
+
    return 0;
 }
 
-void reverse_transform(PNM *image, char *input, char *output, char *seed, 
-char *tap){
-   assert(input != NULL && output != NULL && seed != NULL && tap != NULL);
+LFSR *initialize_password(char *password, char *tap){
+   assert(password != NULL);
 
-   load_pnm(&image, output);
-   write_pnm(image, input);
-   destroy(image, 2);
+   char *base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+   int nombre = 0, binar = 0;
+   char b[100] = "", buffer[30];
+
+   for(int i = 0; password[i] != '\0'; i++){
+      for(int j = 0; base64[j] != '\0'; j++){
+         if(password[i] == base64[j]){
+            nombre = j;
+            binar = binary(nombre);
+            sprintf(buffer, "%d", binar);
+            strcat(b, buffer);
+         }
+      }
+   }
+   printf("%s\n", b);
+   LFSR *lfsr = initialize(buffer, (unsigned)atoi(tap));
+
+   return lfsr;
 }
 
-char* XORCipher(char* data, char* key, int dataLen, int keyLen) {
-	char* output = (char*)malloc(sizeof(char) * dataLen);
+int binary(int k){
+   if (k == 0) 
+      return 0;
+   if (k == 1) 
+      return 1;
 
-	for (int i = 0; i < dataLen; ++i) {
-		output[i] = data[i] ^ key[i % keyLen];
-	}
-
-	return output;
+   return (k % 2) + 10 * binary(k / 2);
 }
-
-char* text = "The quick brown fox jumps over the lazy dog.";
-char* key = "secret";
-int dataLen = strlen(text);
-int keyLen = strlen(key);
-char* cipherText = XORCipher(text, key, dataLen, keyLen);
-char* plainText = XORCipher(cipherText, key, dataLen, keyLen);
