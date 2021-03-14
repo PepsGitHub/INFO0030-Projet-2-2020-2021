@@ -97,8 +97,10 @@ void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value){
 
 //debut initialize
 LFSR *initialize(char *seed, unsigned int tap){
-
-   unsigned int N = strlen(seed);
+   unsigned int count = 0;
+   for(unsigned int i = 0; seed[i] != '\0'; i++)
+      count++;
+   unsigned int N = count;
    LFSR *lfsr = create_lfsr(N, seed, tap);
 
    return lfsr;

@@ -128,17 +128,16 @@ int main(int argc, char *argv[]) {
          return -1;
       }
    }
-
+   char *final;
    if(password != NULL){
-      char *final = (char *) malloc((sizeof(char) * strlen(password) * 6) + 1);
+      int count = 0;
+      for(int i = 0; password[i] != '\0'; i++){
+         count++;
+      }
+      final = (char *) malloc((sizeof(char) * count * 6) + 1);
       seed = initialize_password(password, final);
-      free(final);
+      //free(final);
    }
-
-   printf("%d\n", strcmp(inputX, output));
-   printf("%d\n", strcmp(inputX2, output));
-   printf("%d\n", strcmp(outputX, input));
-   printf("%d\n", strcmp(outputX2, input));
 
    unsigned k = 32;
    //permet de chiffrer/déchiffrer l'image si besoin
@@ -169,7 +168,7 @@ int main(int argc, char *argv[]) {
          return 0;
    }
    if(password != NULL){
-      //free(seed);
+      free(final);
    }
    destroy(image, 3);
    

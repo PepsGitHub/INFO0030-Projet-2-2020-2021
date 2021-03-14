@@ -39,14 +39,13 @@ char *initialize_password(char *password, char *final){
    assert(password != NULL);
 
    char *base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-   int nombre = 0, binar = 0;
+   int binar = 0;
    char b[100] = "", buffer[7];
 
    for(int i = 0; password[i] != '\0'; i++){
       for(int j = 0; base64[j] != '\0'; j++){
          if(password[i] == base64[j]){
-            nombre = j;
-            binar = binary(nombre);
+            binar = binary(j);
             sprintf(buffer, "%d", binar);
             for(int k = 0; k < 6; k++){
                if(buffer[k] == '\0'){
@@ -74,3 +73,28 @@ int binary(int k){
 
    return (k % 2) + 10 * binary(k / 2);
 }
+
+/*
+int transform(PNM *image, char *seed, char *tap, unsigned k){
+   assert(image != NULL && seed != NULL && tap != NULL);
+
+   LFSR *lfsr = initialize(seed, (unsigned int)atoi(tap));
+
+   int resultat = 0;
+
+   unsigned int **matrix = get_matrix(image);
+
+   for(unsigned int i = 0; i < get_rows(image); i++)
+      for(unsigned int j = 0; j < get_columns(image); j++){
+         for(int i = 0; i < 32; i++){
+            resultat = generate(lfsr, k);
+         }
+         matrix[i][j] ^= resultat;
+      }
+
+   set_matrix(image, matrix);
+   destroy_lfsr(lfsr, 1);
+
+   return 0;
+}
+*/
