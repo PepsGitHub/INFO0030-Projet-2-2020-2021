@@ -20,7 +20,6 @@
 #include "pnm.h"
 #include "lfsr.h"
 #include "verify.h"
-#include "chiffrement.h"
 
 /**
  * Définition du type opaque PNM

@@ -25,11 +25,11 @@ pnm_tests: pnm_tests.o pnm.o seatest.o
 lfsr_tests: lfsr_tests.o lfsr.o seatest.o
 	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o
 
-basic_cipher: main.o pnm.o lfsr.o verify.o chiffrement.o
-	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o chiffrement.o
+basic_cipher: main.o pnm.o lfsr.o verify.o
+	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o
 
-advanced_cipher: main.o pnm.o lfsr.o verify.o chiffrement.o
-	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o chiffrement.o
+advanced_cipher: main.o pnm.o lfsr.o verify.o
+	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -51,9 +51,6 @@ seatest.o: seatest.c
 
 verify.o: verify.c
 	$(CC) -c verify.c -o verify.o $(CFLAGS)
-
-chiffrement.o: chiffrement.c
-	$(CC) -c chiffrement.c -o chiffrement.o $(CFLAGS)
 
 clean:
 	rm -f *.o $(EXEC) *~

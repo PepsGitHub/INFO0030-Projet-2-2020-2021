@@ -17,7 +17,6 @@
 #include "pnm.h"
 #include "lfsr.h"
 #include "verify.h"
-#include "chiffrement.h"
 
 //debut manage_format_input
 int manage_format_input(PNM *image, char *format, char *input){

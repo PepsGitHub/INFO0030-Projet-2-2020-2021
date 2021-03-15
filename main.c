@@ -21,7 +21,6 @@
 #include "pnm.h"
 #include "lfsr.h"
 #include "verify.h"
-#include "chiffrement.h"
 
 
 int main(int argc, char *argv[]) {
@@ -69,7 +68,7 @@ int main(int argc, char *argv[]) {
    strcat(inputX2, input);
    strcat(outputX2, output);
 
-   if(strcmp(outputX, input) != 0 && strcmp(outputX2, input) != 0){
+   //if(strcmp(outputX, input) != 0 && strcmp(outputX2, input) != 0){
       //appel de load_pnm et checking des valeurs de retour
       switch(load_pnm(&image, input)){
          case 0:
@@ -91,7 +90,7 @@ int main(int argc, char *argv[]) {
             printf("Valeur de retour inconnue\n");
             return 0;
       }
-   }
+   //}
 
  //permet de gérer les caractères interdits dans l'output
    if(verify_output(output)){
@@ -136,20 +135,16 @@ int main(int argc, char *argv[]) {
       }
       final = (char *) malloc((sizeof(char) * count * 6) + 1);
       seed = initialize_password(password, final);
-      //free(final);
    }
 
    unsigned k = 32;
    //permet de chiffrer/déchiffrer l'image si besoin
-   if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0)
+   if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0 ||
+      strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0)
       transform(image, seed, tap, k);
-   else if(strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0){
-      load_pnm(&image, input);
-      transform(image, seed, tap, k);
-      write_pnm(image, output);
-      destroy(image, 3);
-      return 0;
-   }
+   else
+      printf("Mauvais nom de fichier pour la transformation\n");
+
    //appel de write_pnm et checking des valeurs de retour
    switch(write_pnm(image, output)){
       case 0:
