@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['fixture_5ffilter_24',['fixture_filter',['../seatest_8c.html#a10642ef4142b117e028d1598cfe95cbb',1,'fixture_filter(char *filter):&#160;seatest.c'],['../seatest_8h.html#a10642ef4142b117e028d1598cfe95cbb',1,'fixture_filter(char *filter):&#160;seatest.c']]],
-  ['fixture_5fsetup_25',['fixture_setup',['../seatest_8c.html#a682f814529a238f53afbfb528f0b8654',1,'fixture_setup(void(*setup)(void)):&#160;seatest.c'],['../seatest_8h.html#a682f814529a238f53afbfb528f0b8654',1,'fixture_setup(void(*setup)(void)):&#160;seatest.c']]],
-  ['fixture_5fteardown_26',['fixture_teardown',['../seatest_8c.html#a1e4eb4121eb6544020718899c984a914',1,'fixture_teardown(void(*teardown)(void)):&#160;seatest.c'],['../seatest_8h.html#a1e4eb4121eb6544020718899c984a914',1,'fixture_teardown(void(*teardown)(void)):&#160;seatest.c']]]
+  ['destroy_23',['destroy',['../pnm_8c.html#a062b752e75e3d14f98214d2f3d7d4f06',1,'destroy(PNM *image, unsigned int allocation_value):&#160;pnm.c'],['../pnm_8h.html#a062b752e75e3d14f98214d2f3d7d4f06',1,'destroy(PNM *image, unsigned int allocation_value):&#160;pnm.c']]],
+  ['destroy_5flfsr_24',['destroy_lfsr',['../lfsr_8c.html#a47c80404823d821fc198f8f6d3a540fd',1,'destroy_lfsr(LFSR *lfsr, unsigned int allocation_value):&#160;lfsr.c'],['../lfsr_8h.html#a47c80404823d821fc198f8f6d3a540fd',1,'destroy_lfsr(LFSR *lfsr, unsigned int allocation_value):&#160;lfsr.c']]]
 ];

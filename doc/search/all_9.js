@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operation_52',['operation',['../lfsr_8c.html#a39f3e6f2b48f3601b69d030cde7dfbb4',1,'operation(LFSR *lfsr):&#160;lfsr.c'],['../lfsr_8h.html#a39f3e6f2b48f3601b69d030cde7dfbb4',1,'operation(LFSR *lfsr):&#160;lfsr.c']]]
+  ['n_53',['N',['../struct_l_f_s_r__t.html#ae8b170dcb376fe60270f4675f84e4477',1,'LFSR_t']]]
 ];

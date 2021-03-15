@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">lfsr.c File Reference</div>  </div>
@@ -82,6 +83,11 @@ $(function() {
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_l_f_s_r__t.html">LFSR_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad7d3989380045fa268d4b5f0c17bd283"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#ad7d3989380045fa268d4b5f0c17bd283">TRIPLET</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ad7d3989380045fa268d4b5f0c17bd283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -108,19 +114,38 @@ Functions</h2></td></tr>
 <tr class="memitem:a47c80404823d821fc198f8f6d3a540fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a47c80404823d821fc198f8f6d3a540fd">destroy_lfsr</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr, unsigned int allocation_value)</td></tr>
 <tr class="memdesc:a47c80404823d821fc198f8f6d3a540fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire en fonction de l'allocation.  <a href="lfsr_8c.html#a47c80404823d821fc198f8f6d3a540fd">More...</a><br /></td></tr>
 <tr class="separator:a47c80404823d821fc198f8f6d3a540fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b624ca59134a142ee4714edbfa9427e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a9b624ca59134a142ee4714edbfa9427e">initialisation</a> (char *seed, unsigned int tap)</td></tr>
-<tr class="memdesc:a9b624ca59134a142ee4714edbfa9427e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un LFSR et remplit ses champs.  <a href="lfsr_8c.html#a9b624ca59134a142ee4714edbfa9427e">More...</a><br /></td></tr>
-<tr class="separator:a9b624ca59134a142ee4714edbfa9427e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39f3e6f2b48f3601b69d030cde7dfbb4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a39f3e6f2b48f3601b69d030cde7dfbb4">operation</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr)</td></tr>
-<tr class="memdesc:a39f3e6f2b48f3601b69d030cde7dfbb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise une opération sur le registre.  <a href="lfsr_8c.html#a39f3e6f2b48f3601b69d030cde7dfbb4">More...</a><br /></td></tr>
-<tr class="separator:a39f3e6f2b48f3601b69d030cde7dfbb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a930f85adac4594978553333e21bb9b4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a930f85adac4594978553333e21bb9b4a">initialize</a> (char *seed, unsigned int tap)</td></tr>
+<tr class="memdesc:a930f85adac4594978553333e21bb9b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un LFSR et remplit ses champs.  <a href="lfsr_8c.html#a930f85adac4594978553333e21bb9b4a">More...</a><br /></td></tr>
+<tr class="separator:a930f85adac4594978553333e21bb9b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a83dfdb002244657860f021f380bf0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a8a83dfdb002244657860f021f380bf0d">operate</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr)</td></tr>
+<tr class="memdesc:a8a83dfdb002244657860f021f380bf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise une opération sur le registre.  <a href="lfsr_8c.html#a8a83dfdb002244657860f021f380bf0d">More...</a><br /></td></tr>
+<tr class="separator:a8a83dfdb002244657860f021f380bf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2921bcc198d4a231251044ffb325320"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#aa2921bcc198d4a231251044ffb325320">string</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr)</td></tr>
 <tr class="memdesc:aa2921bcc198d4a231251044ffb325320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforme le contenu du registre en une chaîne de charactères.  <a href="lfsr_8c.html#aa2921bcc198d4a231251044ffb325320">More...</a><br /></td></tr>
 <tr class="separator:aa2921bcc198d4a231251044ffb325320"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6509c967ab492a4d57e6176033555e42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a6509c967ab492a4d57e6176033555e42">generation</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr, unsigned int k)</td></tr>
-<tr class="memdesc:a6509c967ab492a4d57e6176033555e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise k opérations sur le registre.  <a href="lfsr_8c.html#a6509c967ab492a4d57e6176033555e42">More...</a><br /></td></tr>
-<tr class="separator:a6509c967ab492a4d57e6176033555e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6714e605043e06e6ffba35c20d51adb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lfsr_8c.html#a6714e605043e06e6ffba35c20d51adb6">generate</a> (<a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *lfsr, unsigned int k)</td></tr>
+<tr class="memdesc:a6714e605043e06e6ffba35c20d51adb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise k opérations sur le registre.  <a href="lfsr_8c.html#a6714e605043e06e6ffba35c20d51adb6">More...</a><br /></td></tr>
+<tr class="separator:a6714e605043e06e6ffba35c20d51adb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad7d3989380045fa268d4b5f0c17bd283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7d3989380045fa268d4b5f0c17bd283">&#9670;&nbsp;</a></span>TRIPLET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRIPLET&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="lfsr_8c.html">lfsr.c</a></p>
+<p>Ce fichier contient les déclarations de types et les prototypes des fonctions pour le chiffrement d'images PNM.</p>
+<dl class="section author"><dt>Author</dt><dd>: Dumoulin Peissone S193957 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>: 10/03/21 @projet: INFO0030 Projet 2 </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a822883bd6266b75bcfa1c0663965a490"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a822883bd6266b75bcfa1c0663965a490">&#9670;&nbsp;</a></span>create_lfsr()</h2>
@@ -196,14 +221,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6509c967ab492a4d57e6176033555e42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6509c967ab492a4d57e6176033555e42">&#9670;&nbsp;</a></span>generation()</h2>
+<a id="a6714e605043e06e6ffba35c20d51adb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6714e605043e06e6ffba35c20d51adb6">&#9670;&nbsp;</a></span>generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int generation </td>
+          <td class="memname">int generate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *&#160;</td>
           <td class="paramname"><em>lfsr</em>, </td>
@@ -323,14 +348,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9b624ca59134a142ee4714edbfa9427e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b624ca59134a142ee4714edbfa9427e">&#9670;&nbsp;</a></span>initialisation()</h2>
+<a id="a930f85adac4594978553333e21bb9b4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a930f85adac4594978553333e21bb9b4a">&#9670;&nbsp;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> * initialisation </td>
+          <td class="memname"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> * initialize </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>seed</em>, </td>
@@ -363,14 +388,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a39f3e6f2b48f3601b69d030cde7dfbb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39f3e6f2b48f3601b69d030cde7dfbb4">&#9670;&nbsp;</a></span>operation()</h2>
+<a id="a8a83dfdb002244657860f021f380bf0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a83dfdb002244657860f021f380bf0d">&#9670;&nbsp;</a></span>operate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int operation </td>
+          <td class="memname">int operate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="lfsr_8h.html#ab2653896e6359801f55af4668a40eb6c">LFSR</a> *&#160;</td>
           <td class="paramname"><em>lfsr</em></td><td>)</td>

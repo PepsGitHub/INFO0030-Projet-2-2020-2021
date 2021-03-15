@@ -20,6 +20,7 @@
 
 #include "pnm.h"
 #include "lfsr.h"
+#include "cipher.h"
 #include "verify.h"
 
 
@@ -136,13 +137,15 @@ int main(int argc, char *argv[]) {
       final = (char *) malloc((sizeof(char) * count * 6) + 1);
       seed = initialize_password(password, final);
    }
-
    unsigned k = 32;
    //permet de chiffrer/déchiffrer l'image si besoin
-   if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0 ||
-      strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0)
+   if(strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0){
+      set_maxValuePixel(image, 255);
       transform(image, seed, tap, k);
-   else
+   }else if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0){
+      set_maxValuePixel(image, 65535);
+      transform(image, seed, tap, k);
+   }else
       printf("Mauvais nom de fichier pour la transformation\n");
 
    //appel de write_pnm et checking des valeurs de retour

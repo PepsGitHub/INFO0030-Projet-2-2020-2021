@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['verify_5foutput_190',['verify_output',['../verify_8c.html#a03aa65c4057ddf00a4fb573051153c23',1,'verify_output(char *output):&#160;verify.c'],['../verify_8h.html#a03aa65c4057ddf00a4fb573051153c23',1,'verify_output(char *output):&#160;verify.c']]],
-  ['verify_5fseed_191',['verify_seed',['../verify_8c.html#aaf1d4776fd1ae9f187b9f904ae2fb2f8',1,'verify_seed(char *seed):&#160;verify.c'],['../verify_8h.html#afe6e1eefb37f0bac734de17be430be77',1,'verify_seed(char *seed):&#160;verify.c']]],
-  ['verify_5ftap_192',['verify_tap',['../verify_8c.html#a3a00a6f6f0cd23a04c0786459d4c4896',1,'verify_tap(char *tap):&#160;verify.c'],['../verify_8h.html#abd6acd138185ce7a7bd883d564061036',1,'verify_tap(char *tap):&#160;verify.c']]]
+  ['test_5ffilter_191',['test_filter',['../seatest_8c.html#a5f4807eba673af73e63d699b362dec42',1,'test_filter(char *filter):&#160;seatest.c'],['../seatest_8h.html#a5f4807eba673af73e63d699b362dec42',1,'test_filter(char *filter):&#160;seatest.c']]],
+  ['transform_192',['transform',['../cipher_8c.html#a23ea7df83daace44d2f4a1add283a3ca',1,'transform(PNM *image, char *seed, char *tap, unsigned k):&#160;cipher.c'],['../cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca',1,'transform(PNM *image, char *seed, char *tap, unsigned k):&#160;cipher.c']]]
 ];

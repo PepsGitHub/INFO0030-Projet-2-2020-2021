@@ -79,7 +79,6 @@ $(function() {
 <code>#include &quot;<a class="el" href="pnm_8h_source.html">pnm.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="lfsr_8h_source.html">lfsr.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="verify_8h_source.html">verify.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="chiffrement_8h_source.html">chiffrement.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -108,7 +107,7 @@ Functions</h2></td></tr>
 <tr class="memitem:aea42d066bbb35f9f831542eaff90de6b"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#aea42d066bbb35f9f831542eaff90de6b">get_maxValuePixel</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image)</td></tr>
 <tr class="memdesc:aea42d066bbb35f9f831542eaff90de6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur en lecture pour le champ maxValuePixel de image*.  <a href="pnm_8c.html#aea42d066bbb35f9f831542eaff90de6b">More...</a><br /></td></tr>
 <tr class="separator:aea42d066bbb35f9f831542eaff90de6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae224d7ea825d8b1818d4366c2893fcd2"><td class="memItemLeft" align="right" valign="top">unsigned int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#ae224d7ea825d8b1818d4366c2893fcd2">get_matrix</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image)</td></tr>
+<tr class="memitem:ae224d7ea825d8b1818d4366c2893fcd2"><td class="memItemLeft" align="right" valign="top">unsigned int **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#ae224d7ea825d8b1818d4366c2893fcd2">get_matrix</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image)</td></tr>
 <tr class="memdesc:ae224d7ea825d8b1818d4366c2893fcd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur en lecture pour le champ matrix de image*.  <a href="pnm_8c.html#ae224d7ea825d8b1818d4366c2893fcd2">More...</a><br /></td></tr>
 <tr class="separator:ae224d7ea825d8b1818d4366c2893fcd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41585e823e215a7561cbe265148da346"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#a41585e823e215a7561cbe265148da346">set_magicNumber</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image, char *magicNumber)</td></tr>
@@ -123,9 +122,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a96f278092a900170b6ba3a02f6138d27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#a96f278092a900170b6ba3a02f6138d27">set_maxValuePixel</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image, unsigned int maxValuePixel)</td></tr>
 <tr class="memdesc:a96f278092a900170b6ba3a02f6138d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur en écriture pour le champ maxValuePixel de *image.  <a href="pnm_8c.html#a96f278092a900170b6ba3a02f6138d27">More...</a><br /></td></tr>
 <tr class="separator:a96f278092a900170b6ba3a02f6138d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1767db501de388c803082ec15a9d3a70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#a1767db501de388c803082ec15a9d3a70">set_matrix</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image, unsigned int *matrix)</td></tr>
-<tr class="memdesc:a1767db501de388c803082ec15a9d3a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur en écriture pour le champ matrix de *image.  <a href="pnm_8c.html#a1767db501de388c803082ec15a9d3a70">More...</a><br /></td></tr>
-<tr class="separator:a1767db501de388c803082ec15a9d3a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c04a9191197059ef4a38c8065ab1d00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#a1c04a9191197059ef4a38c8065ab1d00">set_matrix</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image, unsigned int **matrix)</td></tr>
+<tr class="separator:a1c04a9191197059ef4a38c8065ab1d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38aa548069d6bb8934ec582a3dd6b979"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pnm_8c.html#a38aa548069d6bb8934ec582a3dd6b979">create_matrix</a> (<a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *image)</td></tr>
 <tr class="memdesc:a38aa548069d6bb8934ec582a3dd6b979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée et alloue dynamiquement la matrice de *image.  <a href="pnm_8c.html#a38aa548069d6bb8934ec582a3dd6b979">More...</a><br /></td></tr>
 <tr class="separator:a38aa548069d6bb8934ec582a3dd6b979"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -566,14 +564,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1767db501de388c803082ec15a9d3a70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1767db501de388c803082ec15a9d3a70">&#9670;&nbsp;</a></span>set_matrix()</h2>
+<a id="a1c04a9191197059ef4a38c8065ab1d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c04a9191197059ef4a38c8065ab1d00">&#9670;&nbsp;</a></span>set_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> * set_matrix </td>
+          <td class="memname"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a>* set_matrix </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="pnm_8h.html#a5685d2cc86af79912d0d3e882e9640fd">PNM</a> *&#160;</td>
           <td class="paramname"><em>image</em>, </td>
@@ -581,7 +579,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramtype">unsigned int **&#160;</td>
           <td class="paramname"><em>matrix</em>&#160;</td>
         </tr>
         <tr>
@@ -591,18 +589,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Accesseur en écriture pour le champ matrix de *image. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">image</td><td>un pointeur sur PNM </td></tr>
-    <tr><td class="paramname">matrix</td><td>matrice contenant la valeur de chaque pixel de l'image</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>: image != NULL </dd></dl>
-<dl class="section post"><dt>Postcondition</dt><dd>: accès en écriture au champ matrix de *image</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>: image Succès </dd></dl>
 
 </div>
 </div>

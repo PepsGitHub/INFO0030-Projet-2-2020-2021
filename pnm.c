@@ -28,10 +28,10 @@
 struct PNM_t {
    char magicNumber[2]; /*Nombre qui caractérise le type de fichier
                       (1 pour pbm, 2 pour pgm, 3 pour ppm)*/
-   unsigned int columns; //Nombre de pixels de hauteur
-   unsigned int rows; //Nombre de pixels de largeur
-   unsigned int maxValuePixel; //Valeur maximale que peut prendre un pixel
-   unsigned int **matrix; //Matrice contenant la valeur de chaque pixel de l'image
+   unsigned short columns; //Nombre de pixels de hauteur
+   unsigned short rows; //Nombre de pixels de largeur
+   unsigned short maxValuePixel; //Valeur maximale que peut prendre un pixel
+   unsigned short **matrix; //Matrice contenant la valeur de chaque pixel de l'image
 };
 
 //debut constructeur
@@ -50,25 +50,25 @@ char *get_magicNumber(PNM *image){
    return image->magicNumber;
 }
 
-unsigned int get_columns(PNM *image){
+unsigned short get_columns(PNM *image){
    assert(image!=NULL);
 
    return image->columns;
 }
 
-unsigned int get_rows(PNM *image){
+unsigned short get_rows(PNM *image){
    assert(image!=NULL);
 
    return image->rows;
 }
 
-unsigned int get_maxValuePixel(PNM *image){
+unsigned short get_maxValuePixel(PNM *image){
    assert(image!=NULL);
 
    return image->maxValuePixel;
 }
 
-unsigned int **get_matrix(PNM *image){
+unsigned short **get_matrix(PNM *image){
    assert(image!=NULL);
 
    return image->matrix;
@@ -85,7 +85,7 @@ PNM *set_magicNumber(PNM *image, char *magicNumber){
    return image;
 }
 
-PNM *set_columns(PNM *image, unsigned int columns){
+PNM *set_columns(PNM *image, unsigned short columns){
    assert(image!=NULL);
 
    image->columns = columns;
@@ -93,7 +93,7 @@ PNM *set_columns(PNM *image, unsigned int columns){
    return image;
 }
 
-PNM *set_rows(PNM *image, unsigned int rows){
+PNM *set_rows(PNM *image, unsigned short rows){
    assert(image!=NULL);
 
    image->rows = rows;
@@ -101,7 +101,7 @@ PNM *set_rows(PNM *image, unsigned int rows){
    return image;
 }
 
-PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel){
+PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel){
    assert(image!=NULL);
 
    image->maxValuePixel = maxValuePixel;
@@ -109,7 +109,7 @@ PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel){
    return image;
 }
 
-PNM *set_matrix(PNM *image, unsigned int **matrix){
+PNM *set_matrix(PNM *image, unsigned short **matrix){
    assert(image!=NULL);
 
    image->matrix = matrix;
@@ -120,15 +120,15 @@ PNM *set_matrix(PNM *image, unsigned int **matrix){
 //debut create_matrix
 int create_matrix(PNM *image){
    assert(image != NULL);
-   image->matrix = malloc(image->rows * sizeof(unsigned int*));
+   image->matrix = malloc(image->rows * sizeof(unsigned short*));
    if(!image->matrix){
       destroy(image, 1);
       return -1;
    }
 
    if(get_magicNumber(image)[1] == '3'){
-      for(unsigned int i = 0;i < image->rows;i++){
-         image->matrix[i] = malloc(image->columns * TRIPLET * sizeof(unsigned int));
+      for(unsigned short i = 0;i < image->rows;i++){
+         image->matrix[i] = malloc(image->columns * TRIPLET * sizeof(unsigned short));
 
          if(!image->matrix[i]){
             destroy(image, 2);
@@ -136,8 +136,8 @@ int create_matrix(PNM *image){
          }
       }
    }else{
-      for(unsigned int i = 0;i < image->rows;i++){
-         image->matrix[i] = malloc(image->columns * sizeof(unsigned int));
+      for(unsigned short i = 0;i < image->rows;i++){
+         image->matrix[i] = malloc(image->columns * sizeof(unsigned short));
 
          if(!image->matrix[i]){
             destroy(image, 2);
@@ -156,19 +156,19 @@ int load_matrix(PNM *image, FILE *fp){
    switch(get_magicNumber(image)[1]){
    case '1':
    case '2':
-      for(unsigned int i = 0; i < get_rows(image); i++){
-         for(unsigned int j = 0; j < get_columns(image); j++){
+      for(unsigned short i = 0; i < get_rows(image); i++){
+         for(unsigned short j = 0; j < get_columns(image); j++){
             manage_comments(fp);
-            fscanf(fp,"%u ", &(image->matrix[i][j]));
+            fscanf(fp,"%hu ", &(image->matrix[i][j]));
          }
          fscanf(fp, "\n");
       }
       break;
    case '3':
-      for(unsigned int i = 0; i < get_rows(image); i++){
-         for(unsigned int j = 0; j < 3 * get_columns(image); j++){
+      for(unsigned short i = 0; i < get_rows(image); i++){
+         for(unsigned short j = 0; j < 3 * get_columns(image); j++){
             manage_comments(fp);
-            fscanf(fp,"%u ", &(image->matrix[i][j]));
+            fscanf(fp,"%hu ", &(image->matrix[i][j]));
          }
          fscanf(fp, "\n");
       }
@@ -186,27 +186,27 @@ int write_matrix(PNM *image, FILE *fp){
 
    switch(get_magicNumber(image)[1]){
    case '1' :
-      for(unsigned int i=0;i<get_rows(image);i++){
-         for(unsigned int j=0;j<get_columns(image);j++){
-            fprintf(fp,"%u ", image->matrix[i][j]);
+      for(unsigned short i=0;i<get_rows(image);i++){
+         for(unsigned short j=0;j<get_columns(image);j++){
+            fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
       }
       break;
    case '2' :
-      fprintf(fp, "%u\n", get_maxValuePixel(image));
-      for(unsigned int i=0;i<get_rows(image);i++){
-         for(unsigned int j=0;j<get_columns(image);j++){
-            fprintf(fp,"%u ", image->matrix[i][j]);
+      fprintf(fp, "%hu\n", get_maxValuePixel(image));
+      for(unsigned short i=0;i<get_rows(image);i++){
+         for(unsigned short j=0;j<get_columns(image);j++){
+            fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
       }
       break;
    case '3' :
-      fprintf(fp, "%u\n", get_maxValuePixel(image));
-      for(unsigned int i=0;i<get_rows(image);i++){
-         for(unsigned int j=0;j<3*get_columns(image);j++){
-            fprintf(fp,"%u ", image->matrix[i][j]);
+      fprintf(fp, "%hu\n", get_maxValuePixel(image));
+      for(unsigned short i=0;i<get_rows(image);i++){
+         for(unsigned short j=0;j<3*get_columns(image);j++){
+            fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
       }
@@ -219,7 +219,7 @@ int write_matrix(PNM *image, FILE *fp){
 }//fin write_matrix
 
 //debut destroy
-void destroy(PNM *image, unsigned int allocation_value){
+void destroy(PNM *image, unsigned short allocation_value){
    assert(image != NULL && allocation_value > 0 && allocation_value < 4);
    switch (allocation_value){
    case 1://détruit pnm
@@ -230,7 +230,7 @@ void destroy(PNM *image, unsigned int allocation_value){
       free(image);
       break;
    case 3:
-      for(unsigned int i = 0;i < image->rows;i++)
+      for(unsigned short i = 0; i < image->rows; i++)
          free(image->matrix[i]);
       free(image->matrix);
       free(image);
@@ -266,9 +266,9 @@ int load_pnm(PNM **image, char* filename){
 
    manage_comments(fp);
 
-   unsigned int columns = 0, rows = 0, maxValuePixel = 1;
+   unsigned short columns = 0, rows = 0, maxValuePixel = 1;
 
-   fscanf(fp, "%u %u\n", &columns, &rows);
+   fscanf(fp, "%hu %hu\n", &columns, &rows);
 
    if(columns < 1 || rows < 1){
       fclose(fp);
@@ -292,7 +292,7 @@ int load_pnm(PNM **image, char* filename){
       break;
    case '2' :
    case '3' :
-      fscanf(fp,"%u\n", &maxValuePixel);
+      fscanf(fp,"%hu\n", &maxValuePixel);
       set_maxValuePixel(*image, maxValuePixel);
       create_matrix(*image);
       if(load_matrix(*image, fp)){
@@ -319,12 +319,10 @@ int write_pnm(PNM *image, char* filename) {
    if(!fp)
       return -1;
 
-   /*char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
+   char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
 
-   fprintf(fp,"%c%c\n%u %u\n", letter, number, 
+   fprintf(fp,"%c%c\n%hu %hu\n", letter, number, 
            get_columns(image), get_rows(image));
-   write_matrix(image, fp);*/
-   fprintf(fp,"%s\n%u %u\n", get_magicNumber(image), get_columns(image), get_rows(image));
 
    write_matrix(image, fp);
 

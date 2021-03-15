@@ -99,7 +99,7 @@ PNM *create_pnm(void);
 char *get_magicNumber(PNM *image);
 
 /**
- * \fn unsigned int get_columns(PNM *image)
+ * \fn unsigned short get_columns(PNM *image)
  * \brief Accesseur en lecture pour le champ columns de image*
  * 
  * \param image un pointeur sur PNM
@@ -111,10 +111,10 @@ char *get_magicNumber(PNM *image);
  *    image->columns Succès
  */
 
-unsigned int get_columns(PNM *image);
+unsigned short get_columns(PNM *image);
 
 /**
- * \fn unsigned int get_rows(PNM *image)
+ * \fn unsigned short get_rows(PNM *image)
  * \brief Accesseur en lecture pour le champ rows de image*
  * 
  * \param image un pointeur sur PNM
@@ -126,10 +126,10 @@ unsigned int get_columns(PNM *image);
  *    image->rows Succès
  */
 
-unsigned int get_rows(PNM *image);
+unsigned short get_rows(PNM *image);
 
 /**
- * \fn unsigned int get_maxValuePixel(PNM *image)
+ * \fn unsigned short get_maxValuePixel(PNM *image)
  * \brief Accesseur en lecture pour le champ maxValuePixel de image*
  * 
  * \param image un pointeur sur PNM
@@ -141,10 +141,10 @@ unsigned int get_rows(PNM *image);
  *    image->getMaxValuePixel Succès
  */
 
-unsigned int get_maxValuePixel(PNM *image);
+unsigned short get_maxValuePixel(PNM *image);
 
 /**
- * \fn unsigned int *get_matrix(PNM *image)
+ * \fn unsigned short *get_matrix(PNM *image)
  * \brief Accesseur en lecture pour le champ matrix de image*
  * 
  * \param image un pointeur sur PNM
@@ -156,7 +156,7 @@ unsigned int get_maxValuePixel(PNM *image);
  *    image->matrix Succès
  */
 
-unsigned int **get_matrix(PNM *image);
+unsigned short **get_matrix(PNM *image);
 
 /**
  * \fn PNM *set_magicNumber(PNM *image, char *magicNumber)
@@ -176,7 +176,7 @@ unsigned int **get_matrix(PNM *image);
 PNM *set_magicNumber(PNM *image, char *magicNumber);
 
 /**
- * \fn PNM *set_columns(PNM *image, unsigned int columns)
+ * \fn PNM *set_columns(PNM *image, unsigned short columns)
  * \brief Accesseur en écriture pour le champ columns de *image
  * 
  * \param image un pointeur sur PNM
@@ -189,10 +189,10 @@ PNM *set_magicNumber(PNM *image, char *magicNumber);
  *    image Succès
  */
 
-PNM *set_columns(PNM *image, unsigned int columns);
+PNM *set_columns(PNM *image, unsigned short columns);
 
 /**
- * \fn PNM *set_rows(PNM *image, unsigned int rows)
+ * \fn PNM *set_rows(PNM *image, unsigned short rows)
  * \brief Accesseur en écriture pour le champ rows de *image
  * 
  * \param image un pointeur sur PNM
@@ -205,10 +205,10 @@ PNM *set_columns(PNM *image, unsigned int columns);
  *    image Succès
  */
 
-PNM *set_rows(PNM *image, unsigned int rows);
+PNM *set_rows(PNM *image, unsigned short rows);
 
 /**
- * \fn PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel)
+ * \fn PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel)
  * \brief Accesseur en écriture pour le champ maxValuePixel de *image
  * 
  * \param image un pointeur sur PNM
@@ -221,10 +221,10 @@ PNM *set_rows(PNM *image, unsigned int rows);
  *    image Succès
  */
 
-PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel);
+PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel);
 
 /**
- * \fn PNM *set_matrix(PNM *image, unsigned int *matrix)
+ * \fn PNM *set_matrix(PNM *image, unsigned short *matrix)
  * \brief Accesseur en écriture pour le champ matrix de *image
  * 
  * \param image un pointeur sur PNM
@@ -237,7 +237,7 @@ PNM *set_maxValuePixel(PNM *image, unsigned int maxValuePixel);
  *    image Succès
  */
 
-PNM *set_matrix(PNM *image, unsigned int **matrix);
+PNM *set_matrix(PNM *image, unsigned short **matrix);
 
 /**
  * \fn int create_matrix(PNM *image)
@@ -290,7 +290,7 @@ int load_matrix(PNM *image, FILE *fp);
 int write_matrix(PNM *image, FILE *fp);
 
 /**
- * \fn void destroy(PNM *image, unsigned int allocation_value)
+ * \fn void destroy(PNM *image, unsigned short allocation_value)
  * \brief Libère la mémoire en fonction de l'allocation
  * \param image un pointeur sur PNM
  * \param allocation_value le nombre de "couches" d'allocations
@@ -302,7 +302,7 @@ int write_matrix(PNM *image, FILE *fp);
  *    /
  */
 
-void destroy(PNM *image, unsigned int allocation_value);
+void destroy(PNM *image, unsigned short allocation_value);
 
 #endif // __PNM__
 

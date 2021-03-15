@@ -13,23 +13,23 @@ LD=gcc
 LDFLAGS=
 
 # Files
-EXEC=basic_cipher
+EXEC=basic_cipher advanced_cipher lfsr_tests archive doc
 
 ## Rules
 
 all: $(EXEC)
 
-pnm_tests: pnm_tests.o pnm.o seatest.o
-	$(LD) -o pnm_tests pnm_tests.o pnm.o seatest.o
+pnm_tests: pnm_tests.o pnm.o seatest.o verify.o
+	$(LD) -o pnm_tests pnm_tests.o pnm.o seatest.o verify.o
 
-lfsr_tests: lfsr_tests.o lfsr.o seatest.o
-	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o
+lfsr_tests: lfsr_tests.o lfsr.o seatest.o pnm.o verify.o
+	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o pnm.o verify.o
 
-basic_cipher: main.o pnm.o lfsr.o verify.o
-	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o
+basic_cipher: main.o pnm.o lfsr.o verify.o cipher.o
+	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o cipher.o
 
-advanced_cipher: main.o pnm.o lfsr.o verify.o
-	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o
+advanced_cipher: main.o pnm.o lfsr.o verify.o cipher.o
+	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o cipher.o
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -52,11 +52,14 @@ seatest.o: seatest.c
 verify.o: verify.c
 	$(CC) -c verify.c -o verify.o $(CFLAGS)
 
+cipher.o: cipher.c
+	$(CC) -c cipher.c -o cipher.o $(CFLAGS)
+
 clean:
 	rm -f *.o $(EXEC) *~
 
 archive:
-	tar -zcvf chiffrement.tar.gz *.h *.c *.o README.md Makefile doxygen
+	tar -zcvf chiffrement.tar.gz *.h *.c *.o README.md Makefile doc
 
 .PHONY: doc
 doc:

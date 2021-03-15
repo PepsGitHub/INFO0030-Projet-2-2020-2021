@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include "pnm.h"
 #include "lfsr.h"
 #include "seatest.h"
 
@@ -205,9 +207,11 @@ static void all_tests(){
 
 int main(){
    LFSR * lfsr = initialize("01101000010100010000", 16);
-   unsigned long r = generate(lfsr, 32);
-   printf("%s %ld \n", string(lfsr), r);
-   printf("%ld\n", r ^ 104);
+   int r = generate(lfsr, 32);
+   printf("%s %d \n", string(lfsr), r);
+   printf("%d\n", r ^ 104);
+
+   destroy_lfsr(lfsr, 1);
 
    return run_tests(all_tests);
 }//fin main()
