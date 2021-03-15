@@ -1,3 +1,13 @@
+/**
+ * lfsr_tests.c
+ * 
+ * Ce fichier contient les tests unitaires de lfsr.h
+ * 
+ * @author: Dumoulin Peissone S193957
+ * @date: 16/03/21
+ * @projet: INFO0030 Projet 2
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "pnm.h"
@@ -11,7 +21,7 @@ static void test_create_lfsr(){
    assert_string_equal("01101000010", get_seed(register11tap8));
    assert_int_equal(8, (int)get_tap(register11tap8));
 
-   destroy_lfsr(register11tap8, 1);
+   destroy_lfsr(register11tap8);
 }//fin test_create_lfsr
 
 static void test_operate(){
@@ -37,16 +47,16 @@ static void test_operate(){
    assert_false(operate(l9));
    assert_false(operate(l10));
 
-   destroy_lfsr(l1, 1);
-   destroy_lfsr(l2, 1);
-   destroy_lfsr(l3, 1);
-   destroy_lfsr(l4, 1);
-   destroy_lfsr(l5, 1);
-   destroy_lfsr(l6, 1);
-   destroy_lfsr(l7, 1);
-   destroy_lfsr(l8, 1);
-   destroy_lfsr(l9, 1);
-   destroy_lfsr(l10, 1);
+   destroy_lfsr(l1);
+   destroy_lfsr(l2);
+   destroy_lfsr(l3);
+   destroy_lfsr(l4);
+   destroy_lfsr(l5);
+   destroy_lfsr(l6);
+   destroy_lfsr(l7);
+   destroy_lfsr(l8);
+   destroy_lfsr(l9);
+   destroy_lfsr(l10);
 }//fin test_operate()
 
 static void test_generate(){
@@ -72,16 +82,16 @@ static void test_generate(){
    assert_int_equal(23, generate(l9, 5));
    assert_int_equal(29, generate(l10, 5));
 
-   destroy_lfsr(l1, 1);
-   destroy_lfsr(l2, 1);
-   destroy_lfsr(l3, 1);
-   destroy_lfsr(l4, 1);
-   destroy_lfsr(l5, 1);
-   destroy_lfsr(l6, 1);
-   destroy_lfsr(l7, 1);
-   destroy_lfsr(l8, 1);
-   destroy_lfsr(l9, 1);
-   destroy_lfsr(l10, 1);
+   destroy_lfsr(l1);
+   destroy_lfsr(l2);
+   destroy_lfsr(l3);
+   destroy_lfsr(l4);
+   destroy_lfsr(l5);
+   destroy_lfsr(l6);
+   destroy_lfsr(l7);
+   destroy_lfsr(l8);
+   destroy_lfsr(l9);
+   destroy_lfsr(l10);
 }//fin test_generate()
 
 static void test_string(){
@@ -163,31 +173,31 @@ static void test_string(){
    assert_string_equal(get_seed(l23), string(l23));
    assert_string_equal(get_seed(l24), string(l24));
 
-   destroy_lfsr(l1, 1);
-   destroy_lfsr(l2, 1);
-   destroy_lfsr(l3, 1);
-   destroy_lfsr(l4, 1);
-   destroy_lfsr(l5, 1);
-   destroy_lfsr(l6, 1);
-   destroy_lfsr(l7, 1);
-   destroy_lfsr(l8, 1);
-   destroy_lfsr(l9, 1);
-   destroy_lfsr(l10, 1);
-   destroy_lfsr(l11, 1);
+   destroy_lfsr(l1);
+   destroy_lfsr(l2);
+   destroy_lfsr(l3);
+   destroy_lfsr(l4);
+   destroy_lfsr(l5);
+   destroy_lfsr(l6);
+   destroy_lfsr(l7);
+   destroy_lfsr(l8);
+   destroy_lfsr(l9);
+   destroy_lfsr(l10);
+   destroy_lfsr(l11);
 
-   destroy_lfsr(l12, 1);
-   destroy_lfsr(l13, 1);
-   destroy_lfsr(l14, 1);
-   destroy_lfsr(l15, 1);
-   destroy_lfsr(l16, 1);
-   destroy_lfsr(l17, 1);
-   destroy_lfsr(l18, 1);
-   destroy_lfsr(l19, 1);
-   destroy_lfsr(l20, 1);
-   destroy_lfsr(l21, 1);
-   destroy_lfsr(l22, 1);
-   destroy_lfsr(l23, 1);
-   destroy_lfsr(l24, 1);
+   destroy_lfsr(l12);
+   destroy_lfsr(l13);
+   destroy_lfsr(l14);
+   destroy_lfsr(l15);
+   destroy_lfsr(l16);
+   destroy_lfsr(l17);
+   destroy_lfsr(l18);
+   destroy_lfsr(l19);
+   destroy_lfsr(l20);
+   destroy_lfsr(l21);
+   destroy_lfsr(l22);
+   destroy_lfsr(l23);
+   destroy_lfsr(l24);
 }//fin test_string
 
 static void test_fixture(){
@@ -206,12 +216,5 @@ static void all_tests(){
 }//fin all_tests()
 
 int main(){
-   LFSR * lfsr = initialize("01101000010100010000", 16);
-   int r = generate(lfsr, 32);
-   printf("%s %d \n", string(lfsr), r);
-   printf("%d\n", r ^ 104);
-
-   destroy_lfsr(lfsr, 1);
-
    return run_tests(all_tests);
 }//fin main()

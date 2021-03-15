@@ -75,18 +75,18 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef __CIPHER__</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define __CIPHER__</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> <a class="code" href="cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a>(<a class="code" href="struct_p_n_m__t.html">PNM</a> *image, <span class="keywordtype">char</span> *seed, <span class="keywordtype">char</span> *tap, <span class="keywordtype">unsigned</span> k);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="cipher_8h.html#a0342780a762bb3cdfd3631287772d872">initialize_password</a>(<span class="keywordtype">char</span> *password, <span class="keywordtype">char</span> *<span class="keyword">final</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">int</span> <a class="code" href="cipher_8h.html#a31da0ec7901a7db33d49cbd5821a7ac5">binary</a>(<span class="keywordtype">int</span> k);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif // __cipher__</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">int</span> <a class="code" href="cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a>(<a class="code" href="struct_p_n_m__t.html">PNM</a> *image, <span class="keywordtype">char</span> *seed, <span class="keywordtype">char</span> *tap, <span class="keywordtype">unsigned</span> k);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="cipher_8h.html#a361bb3a6e751e82c7b70344b6137e7e1">initialize_password</a>(<span class="keywordtype">char</span> *password, <span class="keywordtype">char</span> *passwordBinary);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">int</span> <a class="code" href="cipher_8h.html#a3d93963213f472f9bc153a08666d8e95">binary</a>(<span class="keywordtype">int</span> position);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif // __cipher__</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="acipher_8h_html_a23ea7df83daace44d2f4a1add283a3ca"><div class="ttname"><a href="cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a></div><div class="ttdeci">int transform(PNM *image, char *seed, char *tap, unsigned k)</div><div class="ttdef"><b>Definition:</b> cipher.c:23</div></div>
-<div class="ttc" id="acipher_8h_html_a31da0ec7901a7db33d49cbd5821a7ac5"><div class="ttname"><a href="cipher_8h.html#a31da0ec7901a7db33d49cbd5821a7ac5">binary</a></div><div class="ttdeci">int binary(int k)</div><div class="ttdef"><b>Definition:</b> cipher.c:80</div></div>
-<div class="ttc" id="astruct_p_n_m__t_html"><div class="ttname"><a href="struct_p_n_m__t.html">PNM_t</a></div><div class="ttdef"><b>Definition:</b> pnm.c:28</div></div>
-<div class="ttc" id="acipher_8h_html_a0342780a762bb3cdfd3631287772d872"><div class="ttname"><a href="cipher_8h.html#a0342780a762bb3cdfd3631287772d872">initialize_password</a></div><div class="ttdeci">char * initialize_password(char *password, char *final)</div><div class="ttdef"><b>Definition:</b> cipher.c:50</div></div>
+<div class="ttc" id="acipher_8h_html_a23ea7df83daace44d2f4a1add283a3ca"><div class="ttname"><a href="cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a></div><div class="ttdeci">int transform(PNM *image, char *seed, char *tap, unsigned k)</div><div class="ttdef"><b>Definition:</b> cipher.c:25</div></div>
+<div class="ttc" id="acipher_8h_html_a361bb3a6e751e82c7b70344b6137e7e1"><div class="ttname"><a href="cipher_8h.html#a361bb3a6e751e82c7b70344b6137e7e1">initialize_password</a></div><div class="ttdeci">char * initialize_password(char *password, char *passwordBinary)</div><div class="ttdoc">Permet de gérer un mot de passe pour advanced_cipher.</div><div class="ttdef"><b>Definition:</b> cipher.c:51</div></div>
+<div class="ttc" id="acipher_8h_html_a3d93963213f472f9bc153a08666d8e95"><div class="ttname"><a href="cipher_8h.html#a3d93963213f472f9bc153a08666d8e95">binary</a></div><div class="ttdeci">int binary(int position)</div><div class="ttdoc">Permet de convertir la position d'un caractère du mot de passe en nombre binaire.</div><div class="ttdef"><b>Definition:</b> cipher.c:79</div></div>
+<div class="ttc" id="astruct_p_n_m__t_html"><div class="ttname"><a href="struct_p_n_m__t.html">PNM_t</a></div><div class="ttdef"><b>Definition:</b> pnm.c:31</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

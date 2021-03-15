@@ -5,7 +5,7 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * \author: Dumoulin Peissone S193957
- * \date: 10/03/21
+ * \date: 16/03/21
  * \projet: INFO0030 Projet 2
  */
 
@@ -21,7 +21,7 @@
  * \brief Librairie pour gérer le chiffrement d'images pnm(.pbm, .pgm, .ppm)
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
- * \date 09/03/2021
+ * \date 16/03/2021
  * 
  * Déclaration du type opaque LFSR
  *
@@ -36,7 +36,7 @@ typedef struct LFSR_t LFSR;
  * \param seed La séquence de bits initiale du registre
  * \param tap Un bit situé à une position particulière
  * 
- * \pre: N > 0, seed != NULL, tap > 0, tap < N
+ * \pre: seed != NULL, tap <= N
  * \post: *lfsr alloué
  * 
  * \return:
@@ -133,13 +133,26 @@ LFSR *set_seed(LFSR *lfsr, char *seed);
 LFSR *set_tap(LFSR *lfsr, unsigned int tap);
 
 /**
+ * \fn void destroy_lfsr(LFSR *lfsr)
+ * \brief Libère la mémoire allouée à *lfsr
+ * \param lfsr un pointeur sur LFSR
+ * 
+ * \pre: lfsr != NULL
+ * \post: Libère un *lfsr alloué
+ * 
+ * \return:
+ *    /
+ */
+void destroy_lfsr(LFSR *lfsr);
+
+/**
  * \fn LFSR *initialize(char *seed, unsigned int tap)
  * \brief Crée un LFSR et remplit ses champs
  * 
  * \param seed la séquence de bits initiale du registre
  * \param tap un bit situé à une position particulière
  * 
- * \pre: lfsr != NULL, 0 < tap < N
+ * \pre: lfsr != NULL
  * \post: lfsr créé et ses champs sont initialisés
  * 
  * \return:
@@ -157,9 +170,25 @@ LFSR *initialize(char *seed, unsigned int tap);
  * \post: opération réussie
  * 
  * \return:
- *    bit Le dernier caractère du registre après l'opération (0 ou 1)
+ *    0 Le bit de poids faible après l'opération = 0
+ *    1 Le bit de poids faible après l'opération = 1
  */
 int operate(LFSR *lfsr);
+
+/**
+ * \fn char *string(LFSR *lfsr)
+ * \brief Transforme le contenu actuel du registre en une chaîne de charactères
+ * 
+ * \param lfsr un pointeur sur LFSR
+ * 
+ * \pre: lfsr != NULL
+ * \post: transformation réussie
+ * 
+ * \return:
+ *    stateRegister Succès
+ */
+char *string(LFSR *lfsr);
+
 /**
  * \fn int generate(LFSR *lfsr, unsigned int k)
  * \brief Réalise k opérations sur le registre
@@ -174,33 +203,5 @@ int operate(LFSR *lfsr);
  *    var Une valeur entière représentant les k bits générés par chaque étape
  */
 int generate(LFSR *lfsr, unsigned int k);
-
-/**
- * \fn char *string(LFSR *lfsr)
- * \brief Transforme le contenu du registre en une chaîne de charactères
- * 
- * \param lfsr un pointeur sur LFSR
- * 
- * \pre: lfsr != NULL
- * \post: transformation réussie
- * 
- * \return:
- *    stateRegister Succès
- */
-char *string(LFSR *lfsr);
-
-/**
- * \fn void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value)
- * \brief Libère la mémoire en fonction de l'allocation
- * \param lfsr un pointeur sur LFSR
- * \param allocation_value le nombre de "couches" d'allocations
- * 
- * \pre: lfsr != NULL, 0 < allocation_value < 2
- * \post: autant de libérations que d'allocations mémoires
- * 
- * \return:
- *    /
- */
-void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value);
 
 #endif // __lfsr__

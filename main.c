@@ -9,6 +9,8 @@
  * @projet: INFO0030 Projet 2
  */
 #define STRING_SIZE 100
+#define MAX_VALUE_PIXEL_DECIPHER 255
+#define MAX_VALUE_PIXEL_CIPHER 65535
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,34 +66,33 @@ int main(int argc, char *argv[]) {
 
    char inputX[STRING_SIZE] = "x", outputX[STRING_SIZE] = "x";
    char inputX2[STRING_SIZE] = "x-advanced", outputX2[STRING_SIZE] = "x-advanced";
+
    strcat(inputX, input);
    strcat(outputX, output);
    strcat(inputX2, input);
    strcat(outputX2, output);
 
-   //if(strcmp(outputX, input) != 0 && strcmp(outputX2, input) != 0){
-      //appel de load_pnm et checking des valeurs de retour
-      switch(load_pnm(&image, input)){
-         case 0:
-            printf("Tout s'est bien passé et l'image est ");
-            printf("correctement chargée en mémoire dans *image\n");
-            break;
-         case -1:
-            printf("Il est impossible d'allouer suffisamment ");
-            printf("de mémoire pour l'image\n");
-            return 0;
-         case -2:
-            printf("Le nom du fichier en input est mal formé\n");
-            destroy(image, 3);
-            return 0;
-         case -3:
-            printf("Le contenu du fichier en input est mal formé\n");
-            return 0;
-         default:
-            printf("Valeur de retour inconnue\n");
-            return 0;
-      }
-   //}
+   //appel de load_pnm et checking des valeurs de retour
+   switch(load_pnm(&image, input)){
+      case 0:
+         printf("Tout s'est bien passé et l'image est ");
+         printf("correctement chargée en mémoire dans *image\n");
+         break;
+      case -1:
+         printf("Il est impossible d'allouer suffisamment ");
+         printf("de mémoire pour l'image\n");
+         return 0;
+      case -2:
+         printf("Le nom du fichier en input est mal formé\n");
+         destroy(image, 3);
+         return 0;
+      case -3:
+         printf("Le contenu du fichier en input est mal formé\n");
+         return 0;
+      default:
+         printf("Valeur de retour inconnue\n");
+         return 0;
+   }
 
  //permet de gérer les caractères interdits dans l'output
    if(verify_output(output)){
@@ -128,22 +129,23 @@ int main(int argc, char *argv[]) {
          return -1;
       }
    }
-   char *final;
+   char *passwordBinary;
    if(password != NULL){
       int count = 0;
       for(int i = 0; password[i] != '\0'; i++){
          count++;
       }
-      final = (char *) malloc((sizeof(char) * count * 6) + 1);
-      seed = initialize_password(password, final);
+      passwordBinary = (char *) malloc((sizeof(char) * count * 6) + 1);
+      seed = initialize_password(password, passwordBinary);
    }
+
    unsigned k = 32;
    //permet de chiffrer/déchiffrer l'image si besoin
-   if(strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0){
-      set_maxValuePixel(image, 255);
+   if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0){
+      set_maxValuePixel(image, MAX_VALUE_PIXEL_CIPHER);
       transform(image, seed, tap, k);
-   }else if(strcmp(inputX, output) == 0 || strcmp(inputX2, output) == 0){
-      set_maxValuePixel(image, 65535);
+   }else if(strcmp(outputX, input) == 0 || strcmp(outputX2, input) == 0){
+      set_maxValuePixel(image, MAX_VALUE_PIXEL_DECIPHER);
       transform(image, seed, tap, k);
    }else
       printf("Mauvais nom de fichier pour la transformation\n");
@@ -166,7 +168,7 @@ int main(int argc, char *argv[]) {
          return 0;
    }
    if(password != NULL){
-      free(final);
+      free(passwordBinary);
    }
    destroy(image, 3);
    

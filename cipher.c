@@ -5,11 +5,13 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 10/03/21
+ * @date: 16/03/21
  * @projet: INFO0030 Projet 2
  */
 
 #define TRIPLET 3
+#define BITS 7
+#define NUMBER 1
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +29,7 @@ int transform(PNM *image, char *seed, char *tap, unsigned k){
 
    unsigned short **matrix = get_matrix(image);
 
-   switch(get_magicNumber(image)[1]){
+   switch(get_magicNumber(image)[NUMBER]){
    case '1':
    case '2':
       for(unsigned short i = 0; i < get_rows(image); i++)
@@ -41,17 +43,16 @@ int transform(PNM *image, char *seed, char *tap, unsigned k){
       break;
    }
    set_matrix(image, matrix);
-   destroy_lfsr(lfsr, 1);
+   destroy_lfsr(lfsr);
 
    return 0;
 }
 
-char *initialize_password(char *password, char *final){
+char *initialize_password(char *password, char *passwordBinary){
    assert(password != NULL);
-
    char *base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
    int binar = 0;
-   char b[100] = "", buffer[7];
+   char buffer[BITS];
 
    for(int i = 0; password[i] != '\0'; i++){
       for(int j = 0; base64[j] != '\0'; j++){
@@ -66,21 +67,22 @@ char *initialize_password(char *password, char *final){
                   buffer[0] = '0';
                }
             }
-            strcat(b, buffer);
+            strcat(passwordBinary, buffer);
          }
       }
    }
-   strcpy(final, b);
-   printf("seed: %s\n", final);
+   printf("seed: %s\n", passwordBinary);
 
-   return final;
+   return passwordBinary;
 }
 
-int binary(int k){
-   if (k == 0) 
+int binary(int position){
+   assert(position >= 0);
+   
+   if (position == 0) 
       return 0;
-   if (k == 1) 
+   if (position == 1) 
       return 1;
 
-   return (k % 2) + 10 * binary(k / 2);
+   return (position % 2) + 10 * binary(position / 2);
 }

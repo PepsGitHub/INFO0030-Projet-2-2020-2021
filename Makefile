@@ -59,7 +59,7 @@ clean:
 	rm -f *.o $(EXEC) *~
 
 archive:
-	tar -zcvf chiffrement.tar.gz *.h *.c *.o README.md Makefile doc
+	tar -zcvf chiffrement.tar.gz *.h *.c *.o Makefile doc
 
 .PHONY: doc
 doc:

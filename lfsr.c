@@ -5,10 +5,11 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 10/03/21
+ * @date: 16/03/21
  * @projet: INFO0030 Projet 2
  */
 #define TRIPLET 3
+#define SEED_SIZE 100
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,12 +26,13 @@
  */
 struct LFSR_t{
    unsigned int N;//nombre de bits dans le registre
-   char seed[100]; //séquence de bits initiale du registre
+   char seed[SEED_SIZE]; //séquence de bits initiale du registre
    unsigned int tap;//bit situé à une position particulière
 };
 
 //debut constructeur
 LFSR *create_lfsr(unsigned int N, char *seed, unsigned int tap){
+   assert(seed != NULL && tap <= N);
 
    LFSR *lfsr = malloc(sizeof(LFSR));
    if(!lfsr)
@@ -64,7 +66,6 @@ unsigned int get_tap(LFSR *lfsr){
 
 //debut accesseurs en ecriture
 LFSR *set_N(LFSR *lfsr, unsigned int N){
-
    lfsr->N = N;
 
    return lfsr;
@@ -80,24 +81,22 @@ LFSR *set_seed(LFSR *lfsr, char *seed){
 }
 
 LFSR *set_tap(LFSR *lfsr, unsigned int tap){
-
    lfsr->tap = tap;
 
    return lfsr;
 }//fin accesseurs en écriture
 
 //debut destroy
-void destroy_lfsr(LFSR *lfsr, unsigned int allocation_value){
-   assert(lfsr != NULL && allocation_value > 0 && allocation_value < 2);
-   switch(allocation_value){
-   case 1://détruit lfsr
-      free(lfsr);
-      break;
-   }
+void destroy_lfsr(LFSR *lfsr){
+   assert(lfsr != NULL);
+
+   free(lfsr);
 }//fin destroy
 
 //debut initialize
 LFSR *initialize(char *seed, unsigned int tap){
+   assert(seed != NULL);
+   
    unsigned int count = 0;
    for(unsigned int i = 0; seed[i] != '\0'; i++)
       count++;

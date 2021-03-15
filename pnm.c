@@ -5,11 +5,14 @@
  * les fonctions de manipulation d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 10/03/21
+ * @date: 16/03/21
  * @projet: INFO0030 Projet 2
  */
 
 #define TRIPLET 3
+#define MAGICNUMBERCHAR 2
+#define LETTER 0
+#define NUMBER 1
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,12 +29,11 @@
  *
  */
 struct PNM_t {
-   char magicNumber[2]; /*Nombre qui caractérise le type de fichier
-                      (1 pour pbm, 2 pour pgm, 3 pour ppm)*/
+   char magicNumber[MAGICNUMBERCHAR]; /*Nombre qui caractérise le type de fichier*/
    unsigned short columns; //Nombre de pixels de hauteur
    unsigned short rows; //Nombre de pixels de largeur
    unsigned short maxValuePixel; //Valeur maximale que peut prendre un pixel
-   unsigned short **matrix; //Matrice contenant la valeur de chaque pixel de l'image
+   unsigned short **matrix; /*Matrice contenant la valeur de chaque pixel de l'image*/
 };
 
 //debut constructeur
@@ -126,7 +128,7 @@ int create_matrix(PNM *image){
       return -1;
    }
 
-   if(get_magicNumber(image)[1] == '3'){
+   if(get_magicNumber(image)[NUMBER] == '3'){
       for(unsigned short i = 0;i < image->rows;i++){
          image->matrix[i] = malloc(image->columns * TRIPLET * sizeof(unsigned short));
 
@@ -153,7 +155,7 @@ int create_matrix(PNM *image){
 int load_matrix(PNM *image, FILE *fp){
    assert(image != NULL && fp != NULL);
 
-   switch(get_magicNumber(image)[1]){
+   switch(get_magicNumber(image)[NUMBER]){
    case '1':
    case '2':
       for(unsigned short i = 0; i < get_rows(image); i++){
@@ -166,7 +168,7 @@ int load_matrix(PNM *image, FILE *fp){
       break;
    case '3':
       for(unsigned short i = 0; i < get_rows(image); i++){
-         for(unsigned short j = 0; j < 3 * get_columns(image); j++){
+         for(unsigned short j = 0; j < TRIPLET * get_columns(image); j++){
             manage_comments(fp);
             fscanf(fp,"%hu ", &(image->matrix[i][j]));
          }
@@ -184,10 +186,10 @@ int load_matrix(PNM *image, FILE *fp){
 int write_matrix(PNM *image, FILE *fp){
    assert(image != NULL && fp != NULL);
 
-   switch(get_magicNumber(image)[1]){
+   switch(get_magicNumber(image)[NUMBER]){
    case '1' :
-      for(unsigned short i=0;i<get_rows(image);i++){
-         for(unsigned short j=0;j<get_columns(image);j++){
+      for(unsigned short i = 0; i < get_rows(image); i++){
+         for(unsigned short j = 0; j < get_columns(image); j++){
             fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
@@ -195,8 +197,8 @@ int write_matrix(PNM *image, FILE *fp){
       break;
    case '2' :
       fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned short i=0;i<get_rows(image);i++){
-         for(unsigned short j=0;j<get_columns(image);j++){
+      for(unsigned short i = 0; i < get_rows(image); i++){
+         for(unsigned short j = 0;j < get_columns(image); j++){
             fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
@@ -204,8 +206,8 @@ int write_matrix(PNM *image, FILE *fp){
       break;
    case '3' :
       fprintf(fp, "%hu\n", get_maxValuePixel(image));
-      for(unsigned short i=0;i<get_rows(image);i++){
-         for(unsigned short j=0;j<3*get_columns(image);j++){
+      for(unsigned short i = 0;i < get_rows(image); i++){
+         for(unsigned short j=0;j < TRIPLET * get_columns(image); j++){
             fprintf(fp,"%hu ", image->matrix[i][j]);
          }
          fprintf(fp,"\n");
@@ -239,7 +241,6 @@ void destroy(PNM *image, unsigned short allocation_value){
 
 //debut load_pnm
 int load_pnm(PNM **image, char* filename){
-
    assert(image != NULL && filename != NULL);
    
    *image = create_pnm();
@@ -280,7 +281,7 @@ int load_pnm(PNM **image, char* filename){
 
    manage_comments(fp);
 
-   switch(get_magicNumber(*image)[1]){
+   switch(get_magicNumber(*image)[NUMBER]){
    case '1' :
       set_maxValuePixel(*image, maxValuePixel);
       create_matrix(*image);
@@ -319,10 +320,9 @@ int write_pnm(PNM *image, char* filename) {
    if(!fp)
       return -1;
 
-   char letter = get_magicNumber(image)[0], number = get_magicNumber(image)[1];
+   char letter = get_magicNumber(image)[LETTER], number = get_magicNumber(image)[NUMBER];
 
-   fprintf(fp,"%c%c\n%hu %hu\n", letter, number, 
-           get_columns(image), get_rows(image));
+   fprintf(fp,"%c%c\n%hu %hu\n", letter, number, get_columns(image), get_rows(image));
 
    write_matrix(image, fp);
 

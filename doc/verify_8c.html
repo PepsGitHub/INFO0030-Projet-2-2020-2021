@@ -95,6 +95,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a3a00a6f6f0cd23a04c0786459d4c4896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le tap contient autre chose que des 0 ou des 1.  <a href="verify_8c.html#a3a00a6f6f0cd23a04c0786459d4c4896">More...</a><br /></td></tr>
 <tr class="separator:a3a00a6f6f0cd23a04c0786459d4c4896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b39013346dfbaba1719828cb96697b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="verify_8c.html#a29b39013346dfbaba1719828cb96697b">verify_password</a> (char *password)</td></tr>
+<tr class="memdesc:a29b39013346dfbaba1719828cb96697b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le mot de passe contient un autre caractère que ceux autorisés.  <a href="verify_8c.html#a29b39013346dfbaba1719828cb96697b">More...</a><br /></td></tr>
 <tr class="separator:a29b39013346dfbaba1719828cb96697b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -163,7 +164,7 @@ Functions</h2></td></tr>
 <p><a class="el" href="verify_8c.html">verify.c</a></p>
 <p>Ce fichier contient les prototypes des fonctions pour gérer les cas particuliers</p>
 <dl class="section author"><dt>Author</dt><dd>: Dumoulin Peissone S193957 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>: 10/03/21 @projet: INFO0030 Projet 2</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>: 16/03/21 @projet: INFO0030 Projet 2</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">image</td><td>un pointeur sur PNM </td></tr>
@@ -223,6 +224,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Vérifie si le mot de passe contient un autre caractère que ceux autorisés. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td>une chaine de caractères représentant le mot de passe</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>: password != NULL </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: mot de passe géré correctement</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>: 0 Succès -1 Caractère invalide dans le mot de passe </dd></dl>
+
 </div>
 </div>
 <a id="aaf1d4776fd1ae9f187b9f904ae2fb2f8"></a>
@@ -273,7 +285,6 @@ Functions</h2></td></tr>
 <p>Vérifie si le tap contient autre chose que des 0 ou des 1. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">image</td><td>un pointeur sur PNM </td></tr>
     <tr><td class="paramname">tap</td><td>une chaine de caractères représentant le tap</td></tr>
   </table>
   </dd>

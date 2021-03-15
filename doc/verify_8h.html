@@ -93,6 +93,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:abd6acd138185ce7a7bd883d564061036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le tap contient autre chose que des 0 ou des 1.  <a href="verify_8h.html#abd6acd138185ce7a7bd883d564061036">More...</a><br /></td></tr>
 <tr class="separator:abd6acd138185ce7a7bd883d564061036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b39013346dfbaba1719828cb96697b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="verify_8h.html#a29b39013346dfbaba1719828cb96697b">verify_password</a> (char *password)</td></tr>
+<tr class="memdesc:a29b39013346dfbaba1719828cb96697b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le mot de passe contient un autre caractère que ceux autorisés.  <a href="verify_8h.html#a29b39013346dfbaba1719828cb96697b">More...</a><br /></td></tr>
 <tr class="separator:a29b39013346dfbaba1719828cb96697b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -100,7 +101,7 @@ Functions</h2></td></tr>
 <p><a class="el" href="verify_8h.html" title="Librairie pour gérer et vérifier les cas particuliers.">verify.h</a></p>
 <p>Ce fichier contient les prototypes des fonctions pour gérer les cas particuliers</p>
 <dl class="section author"><dt>Author</dt><dd>: Dumoulin Peissone S193957 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>: 10/03/21 @projet: INFO0030 Projet 2</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>: 16/03/21 @projet: INFO0030 Projet 2</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Peissone Dumoulin - Université de Liège </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>09/03/2021 </dd></dl>
@@ -170,7 +171,7 @@ Functions</h2></td></tr>
 <p><a class="el" href="verify_8c.html">verify.c</a></p>
 <p>Ce fichier contient les prototypes des fonctions pour gérer les cas particuliers</p>
 <dl class="section author"><dt>Author</dt><dd>: Dumoulin Peissone S193957 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>: 10/03/21 @projet: INFO0030 Projet 2</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>: 16/03/21 @projet: INFO0030 Projet 2</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">image</td><td>un pointeur sur PNM </td></tr>
@@ -230,6 +231,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Vérifie si le mot de passe contient un autre caractère que ceux autorisés. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">password</td><td>une chaine de caractères représentant le mot de passe</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>: password != NULL </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: mot de passe géré correctement</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>: 0 Succès -1 Caractère invalide dans le mot de passe </dd></dl>
+
 </div>
 </div>
 <a id="afe6e1eefb37f0bac734de17be430be77"></a>
@@ -280,7 +292,6 @@ Functions</h2></td></tr>
 <p>Vérifie si le tap contient autre chose que des 0 ou des 1. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">image</td><td>un pointeur sur PNM </td></tr>
     <tr><td class="paramname">tap</td><td>une chaine de caractères représentant le tap</td></tr>
   </table>
   </dd>

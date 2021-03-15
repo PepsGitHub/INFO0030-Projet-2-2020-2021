@@ -5,7 +5,7 @@
  * particuliers
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 10/03/21
+ * @date: 16/03/21
  * @projet: INFO0030 Projet 2
  */
 
@@ -93,7 +93,6 @@ int verify_seed(char *seed);
  * \fn verify_tap(char *tap)
  * \brief Vérifie si le tap contient autre chose que des 0 ou des 1
  * 
- * \param image un pointeur sur PNM
  * \param tap une chaine de caractères représentant le tap
  * 
  * \pre: tap != NULL
@@ -105,6 +104,19 @@ int verify_seed(char *seed);
  */
 int verify_tap(char *tap);
 
+/**
+ * \fn int verify_password(char *password)
+ * \brief Vérifie si le mot de passe contient un autre caractère que ceux autorisés
+ * 
+ * \param password une chaine de caractères représentant le mot de passe
+ * 
+ * \pre: password != NULL
+ * \post: mot de passe géré correctement
+ * 
+ * \return:
+ *    0 Succès
+ *    -1 Caractère invalide dans le mot de passe
+ */
 int verify_password(char *password);
 
 #endif // __verify__
