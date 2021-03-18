@@ -1,8 +1,7 @@
 /**
  * verify.h
  * 
- * Ce fichier contient les prototypes des fonctions pour gérer les cas
- * particuliers
+ * Ce fichier contient les prototypes de fonctions vérifiant d'autres fonctions
  * 
  * @author: Dumoulin Peissone S193957
  * @date: 16/03/21
@@ -18,10 +17,10 @@
 
 /**
  * \file verify.h
- * \brief Librairie pour gérer et vérifier les cas particuliers
+ * \brief Librairie de vérification de fonctions
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
- * \date 09/03/2021
+ * \date 16/03/2021
 */
 
 /**

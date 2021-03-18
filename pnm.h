@@ -18,7 +18,7 @@
 
 /**
  * \file pnm.h
- * \brief Librairie pour gérer les fichiers d'extension pnm (.pbm, .pgm, .ppm)
+ * \brief Librairie pour gérer le type opaque PNM
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
  * \date 19/02/2021
@@ -49,7 +49,7 @@ typedef struct PNM_t PNM;
 int load_pnm(PNM **image, char* filename);
 
 /**
- * \fn int write_pnm(PNM *image, char* filename)
+ * \fn int write_pnm(PNM *image, char *filename)
  * \brief Sauvegarde une image PNM dans un fichier.
  * 
  * \param image un pointeur sur PNM.
@@ -65,7 +65,7 @@ int load_pnm(PNM **image, char* filename);
  *
  */
 
-int write_pnm(PNM *image, char* filename);
+int write_pnm(PNM *image, char *filename);
 
 /**
  * \fn PNM *create_pnm(void)
@@ -224,7 +224,7 @@ PNM *set_rows(PNM *image, unsigned short rows);
 PNM *set_maxValuePixel(PNM *image, unsigned short maxValuePixel);
 
 /**
- * \fn PNM *set_matrix(PNM *image, unsigned short *matrix)
+ * \fn PNM *set_matrix(PNM *image, unsigned short **matrix)
  * \brief Accesseur en écriture pour le champ matrix de *image
  * 
  * \param image un pointeur sur PNM

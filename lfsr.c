@@ -131,9 +131,7 @@ int operate(LFSR *lfsr){
 char *string(LFSR *lfsr){
    assert(lfsr != NULL);
 
-   char *state_register = get_seed(lfsr);
-
-   return state_register;
+   return get_seed(lfsr);
 }//fin string
 
 //debut generate

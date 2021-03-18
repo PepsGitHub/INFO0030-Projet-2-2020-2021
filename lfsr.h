@@ -18,7 +18,7 @@
 
 /**
  * \file lfsr.h
- * \brief Librairie pour gérer le chiffrement d'images pnm(.pbm, .pgm, .ppm)
+ * \brief Librairie pour gérer le type opaque LFSR
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
  * \date 16/03/2021
@@ -29,7 +29,7 @@
 typedef struct LFSR_t LFSR;
 
 /**
- * \fn LFSR *create_lsfr(void)
+ * \fn LFSR *create_lsfr(unsigned int N, char *seed, unsigned int tap)
  * \brief Crée et alloue dynamiquement une variable de type opaque LFSR*
  * 
  * \param N Le nombre de bits dans le registre

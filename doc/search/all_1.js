@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['binary_16',['binary',['../cipher_8c.html#a3d93963213f472f9bc153a08666d8e95',1,'binary(int position):&#160;cipher.c'],['../cipher_8h.html#a3d93963213f472f9bc153a08666d8e95',1,'binary(int position):&#160;cipher.c']]],
-  ['bits_17',['BITS',['../cipher_8c.html#a9d2a7c69bd3fabc41e1ee87df2f283b3',1,'cipher.c']]]
+  ['cipher_2eh_1',['cipher.h',['../cipher_8h.html',1,'']]],
+  ['create_5fmatrix_2',['create_matrix',['../pnm_8h.html#a38aa548069d6bb8934ec582a3dd6b979',1,'pnm.c']]],
+  ['create_5fpnm_3',['create_pnm',['../pnm_8h.html#a91083f36dd80ee24e36ff6b4d9bc4977',1,'pnm.c']]]
 ];

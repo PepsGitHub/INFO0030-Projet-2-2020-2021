@@ -17,8 +17,16 @@
 #define __CIPHER__
 
 /**
- * \fn int transform(PNM *image, char *filename, char *seed, char *tap)
- * \brief chiffre une image
+ * \file cipher.h
+ * \brief Librairie de chiffrement d'images PNM
+ * \author Peissone Dumoulin - Université de Liège
+ * \version 1.0
+ * \date 16/03/2021
+*/
+
+/**
+ * \fn int transform(PNM *image, char *seed, char *tap, unsigned k)
+ * \brief Chiffre une image
  * 
  * \param image un pointeur sur PNM
  * \param seed La séquence de bits initiale du registre

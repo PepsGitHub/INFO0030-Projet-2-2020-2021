@@ -20,16 +20,16 @@ EXEC=basic_cipher advanced_cipher lfsr_tests archive doc
 all: $(EXEC)
 
 pnm_tests: pnm_tests.o pnm.o seatest.o verify.o
-	$(LD) -o pnm_tests pnm_tests.o pnm.o seatest.o verify.o
+	$(LD) -o pnm_tests pnm_tests.o pnm.o seatest.o verify.o $(LDFLAGS)
 
 lfsr_tests: lfsr_tests.o lfsr.o seatest.o pnm.o verify.o
-	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o pnm.o verify.o
+	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o pnm.o verify.o $(LDFLAGS)
 
 basic_cipher: main.o pnm.o lfsr.o verify.o cipher.o
-	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o cipher.o
+	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o cipher.o $(LDFLAGS)
 
 advanced_cipher: main.o pnm.o lfsr.o verify.o cipher.o
-	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o cipher.o
+	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o cipher.o $(LDFLAGS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -59,7 +59,7 @@ clean:
 	rm -f *.o $(EXEC) *~
 
 archive:
-	tar -zcvf chiffrement.tar.gz *.h *.c *.o Makefile doc
+	tar -zcvf chiffrement.tar.gz *.h *.c *.o Makefile Doxyfile doc
 
 .PHONY: doc
 doc:
