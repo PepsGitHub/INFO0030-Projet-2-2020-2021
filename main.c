@@ -22,8 +22,9 @@
 
 #include "pnm.h"
 #include "lfsr.h"
-#include "cipher.h"
 #include "verify.h"
+#include "basic_cipher.h"
+#include "advanced_cipher.h"
 
 
 int main(int argc, char *argv[]) {

@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.18"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>INFO0030 : Projet 2 : Chiffrement d&#39;Images PNM: File List</title>
+        <title>INFO0030 : Projet 2 : Chiffrement d&#39;Images PNM: basic_cipher.h Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
       <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
@@ -94,20 +94,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">File List</div>  </div>
+<div class="title">basic_cipher.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="advanced__cipher_8h_source.html"><span class="icondoc"></span></a><a class="el" href="advanced__cipher_8h.html" target="_self">advanced_cipher.h</a></td><td class="desc">Librairie de chiffrement avancé d'images PNM </td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="basic__cipher_8h_source.html"><span class="icondoc"></span></a><a class="el" href="basic__cipher_8h.html" target="_self">basic_cipher.h</a></td><td class="desc">Librairie de chiffrement basique d'images PNM </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="lfsr_8h_source.html"><span class="icondoc"></span></a><a class="el" href="lfsr_8h.html" target="_self">lfsr.h</a></td><td class="desc">Librairie pour gérer le type opaque LFSR </td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="pnm_8h_source.html"><span class="icondoc"></span></a><a class="el" href="pnm_8h.html" target="_self">pnm.h</a></td><td class="desc">Librairie pour gérer le type opaque PNM </td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="seatest_8h_source.html"><span class="icondoc"></span></a><b>seatest.h</b></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="verify_8h_source.html"><span class="icondoc"></span></a><a class="el" href="verify_8h.html" target="_self">verify.h</a></td><td class="desc">Librairie de vérification de fonctions </td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<a href="basic__cipher_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * Include guard (pour éviter les problèmes d&#39;inclusions multiples</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * Bonne pratique: toujours encadrer un header avec un include guard</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef __BASIC_CIPHER__</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define __BASIC_CIPHER__</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">int</span> <a class="code" href="basic__cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a>(<a class="code" href="struct_p_n_m__t.html">PNM</a> *image, <span class="keywordtype">char</span> *seed, <span class="keywordtype">char</span> *tap, <span class="keywordtype">unsigned</span> k);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif // __basic_cipher__</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="astruct_p_n_m__t_html"><div class="ttname"><a href="struct_p_n_m__t.html">PNM_t</a></div><div class="ttdef"><b>Definition:</b> pnm.c:31</div></div>
+<div class="ttc" id="abasic__cipher_8h_html_a23ea7df83daace44d2f4a1add283a3ca"><div class="ttname"><a href="basic__cipher_8h.html#a23ea7df83daace44d2f4a1add283a3ca">transform</a></div><div class="ttdeci">int transform(PNM *image, char *seed, char *tap, unsigned k)</div><div class="ttdoc">Chiffre une image.</div><div class="ttdef"><b>Definition:</b> basic_cipher.c:24</div></div>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 </div>

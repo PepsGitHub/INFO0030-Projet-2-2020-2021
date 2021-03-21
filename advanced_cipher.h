@@ -1,8 +1,8 @@
 /**
- * cipher.h
+ * advanced_cipher.h
  * 
  * Ce fichier contient les les prototypes
- * des fonctions pour le chiffrement d'images PNM.
+ * des fonctions pour le chiffrement avancé d'images PNM.
  * 
  * \author: Dumoulin Peissone S193957
  * \date: 16/03/21
@@ -13,33 +13,16 @@
  * Include guard (pour éviter les problèmes d'inclusions multiples
  * Bonne pratique: toujours encadrer un header avec un include guard
  */
-#ifndef __CIPHER__
-#define __CIPHER__
+#ifndef __ADVANCED_CIPHER__
+#define __ADVANCED_CIPHER__
 
 /**
- * \file cipher.h
- * \brief Librairie de chiffrement d'images PNM
+ * \file advanced_cipher.h
+ * \brief Librairie de chiffrement avancé d'images PNM
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
  * \date 16/03/2021
 */
-
-/**
- * \fn int transform(PNM *image, char *seed, char *tap, unsigned k)
- * \brief Chiffre une image
- * 
- * \param image un pointeur sur PNM
- * \param seed La séquence de bits initiale du registre
- * \param tap Un bit situé à une position particulière
- * \param k Le nombre d'opérations à effectuer
- * 
- * \pre: image != NULL, seed != NULL, tap != NULL
- * \post: chiffrement réussi
- * 
- * \return:
- *    0 Succès
- */
-int transform(PNM *image, char *seed, char *tap, unsigned k);
 
 /**
  * \fn char *initialize_password(char *password, char *passwordBinary)
@@ -70,4 +53,4 @@ char *initialize_password(char *password, char *passwordBinary);
  */
 int binary(int position);
 
-#endif // __cipher__
+#endif // __advanced_cipher__

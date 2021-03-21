@@ -25,11 +25,11 @@ pnm_tests: pnm_tests.o pnm.o seatest.o verify.o
 lfsr_tests: lfsr_tests.o lfsr.o seatest.o pnm.o verify.o
 	$(LD) -o lfsr_tests lfsr_tests.o lfsr.o seatest.o pnm.o verify.o $(LDFLAGS)
 
-basic_cipher: main.o pnm.o lfsr.o verify.o cipher.o
-	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o cipher.o $(LDFLAGS)
+basic_cipher: main.o pnm.o lfsr.o verify.o basic_cipher.o advanced_cipher.o
+	$(LD) -o basic_cipher main.o pnm.o lfsr.o verify.o basic_cipher.o advanced_cipher.o $(LDFLAGS)
 
-advanced_cipher: main.o pnm.o lfsr.o verify.o cipher.o
-	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o cipher.o $(LDFLAGS)
+advanced_cipher: main.o pnm.o lfsr.o verify.o basic_cipher.o advanced_cipher.o
+	$(LD) -o advanced_cipher main.o pnm.o lfsr.o verify.o basic_cipher.o advanced_cipher.o $(LDFLAGS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -52,14 +52,17 @@ seatest.o: seatest.c
 verify.o: verify.c
 	$(CC) -c verify.c -o verify.o $(CFLAGS)
 
-cipher.o: cipher.c
-	$(CC) -c cipher.c -o cipher.o $(CFLAGS)
+basic_cipher.o: basic_cipher.c
+	$(CC) -c basic_cipher.c -o basic_cipher.o $(CFLAGS)
+
+advanced_cipher.o: advanced_cipher.c
+	$(CC) -c advanced_cipher.c -o advanced_cipher.o $(CFLAGS)
 
 clean:
 	rm -f *.o $(EXEC) *~
 
 archive:
-	tar -zcvf chiffrement.tar.gz *.h *.c *.o Makefile Doxyfile doc
+	tar -zcvf chiffrement.tar.gz *.h *.c Makefile Doxyfile monalisa.pgm doxygen-bootstrapped-master
 
 .PHONY: doc
 doc:

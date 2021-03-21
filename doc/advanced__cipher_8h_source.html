@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.18"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>INFO0030 : Projet 2 : Chiffrement d&#39;Images PNM: File List</title>
+        <title>INFO0030 : Projet 2 : Chiffrement d&#39;Images PNM: advanced_cipher.h Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
       <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
@@ -94,20 +94,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">File List</div>  </div>
+<div class="title">advanced_cipher.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="advanced__cipher_8h_source.html"><span class="icondoc"></span></a><a class="el" href="advanced__cipher_8h.html" target="_self">advanced_cipher.h</a></td><td class="desc">Librairie de chiffrement avancé d'images PNM </td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="basic__cipher_8h_source.html"><span class="icondoc"></span></a><a class="el" href="basic__cipher_8h.html" target="_self">basic_cipher.h</a></td><td class="desc">Librairie de chiffrement basique d'images PNM </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="lfsr_8h_source.html"><span class="icondoc"></span></a><a class="el" href="lfsr_8h.html" target="_self">lfsr.h</a></td><td class="desc">Librairie pour gérer le type opaque LFSR </td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="pnm_8h_source.html"><span class="icondoc"></span></a><a class="el" href="pnm_8h.html" target="_self">pnm.h</a></td><td class="desc">Librairie pour gérer le type opaque PNM </td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="seatest_8h_source.html"><span class="icondoc"></span></a><b>seatest.h</b></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="verify_8h_source.html"><span class="icondoc"></span></a><a class="el" href="verify_8h.html" target="_self">verify.h</a></td><td class="desc">Librairie de vérification de fonctions </td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<a href="advanced__cipher_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * Include guard (pour éviter les problèmes d&#39;inclusions multiples</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * Bonne pratique: toujours encadrer un header avec un include guard</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#ifndef __ADVANCED_CIPHER__</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define __ADVANCED_CIPHER__</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="advanced__cipher_8h.html#a361bb3a6e751e82c7b70344b6137e7e1">initialize_password</a>(<span class="keywordtype">char</span> *password, <span class="keywordtype">char</span> *passwordBinary);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">int</span> <a class="code" href="advanced__cipher_8h.html#a3d93963213f472f9bc153a08666d8e95">binary</a>(<span class="keywordtype">int</span> position);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif // __advanced_cipher__</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aadvanced__cipher_8h_html_a361bb3a6e751e82c7b70344b6137e7e1"><div class="ttname"><a href="advanced__cipher_8h.html#a361bb3a6e751e82c7b70344b6137e7e1">initialize_password</a></div><div class="ttdeci">char * initialize_password(char *password, char *passwordBinary)</div><div class="ttdoc">Permet de gérer un mot de passe pour advanced_cipher.</div><div class="ttdef"><b>Definition:</b> advanced_cipher.c:23</div></div>
+<div class="ttc" id="aadvanced__cipher_8h_html_a3d93963213f472f9bc153a08666d8e95"><div class="ttname"><a href="advanced__cipher_8h.html#a3d93963213f472f9bc153a08666d8e95">binary</a></div><div class="ttdeci">int binary(int position)</div><div class="ttdoc">Permet de convertir la position d'un caractère du mot de passe en nombre binaire.</div><div class="ttdef"><b>Definition:</b> advanced_cipher.c:51</div></div>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 </div>
