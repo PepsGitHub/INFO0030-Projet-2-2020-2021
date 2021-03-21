@@ -5,7 +5,7 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * \author: Dumoulin Peissone S193957
- * \date: 16/03/21
+ * \date: 21/03/21
  * \projet: INFO0030 Projet 2
  */
 
@@ -21,7 +21,7 @@
  * \brief Librairie pour gérer le type opaque LFSR
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
- * \date 16/03/2021
+ * \date 21/03/2021
  * 
  * Déclaration du type opaque LFSR
  *

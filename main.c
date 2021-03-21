@@ -5,7 +5,7 @@
  * de fichiers pnm.
  *
  * @author: Dumoulin Peissone S193957
- * @date: 10/03/21
+ * @date: 21/03/21
  * @projet: INFO0030 Projet 2
  */
 #define STRING_SIZE 100

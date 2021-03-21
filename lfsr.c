@@ -5,9 +5,10 @@
  * des fonctions pour le chiffrement d'images PNM.
  * 
  * @author: Dumoulin Peissone S193957
- * @date: 16/03/21
+ * @date: 21/03/21
  * @projet: INFO0030 Projet 2
  */
+
 #define TRIPLET 3
 #define SEED_SIZE 100
 

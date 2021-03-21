@@ -5,7 +5,7 @@
  * des fonctions pour la manipulation d'images PNM.
  * 
  * \author: Dumoulin Peissone S193957
- * \date: 05/03/21
+ * \date: 21/03/21
  * \projet: INFO0030 Projet 1
  */
 
@@ -21,7 +21,7 @@
  * \brief Librairie pour gérer le type opaque PNM
  * \author Peissone Dumoulin - Université de Liège
  * \version 1.0
- * \date 19/02/2021
+ * \date 21/03/2021
  * 
  * Déclaration du type opaque PNM
  *
