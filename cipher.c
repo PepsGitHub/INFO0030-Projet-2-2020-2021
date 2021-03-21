@@ -68,6 +68,7 @@ char *initialize_password(char *password, char *passwordBinary){
                }
             }
             strcat(passwordBinary, buffer);
+            printf("%s\n", passwordBinary);
          }
       }
    }

@@ -136,6 +136,8 @@ int main(int argc, char *argv[]) {
          count++;
       }
       passwordBinary = (char *) malloc((sizeof(char) * count * 6) + 1);
+      strcpy(passwordBinary, "");
+      printf("%s", passwordBinary);
       seed = initialize_password(password, passwordBinary);
    }
 

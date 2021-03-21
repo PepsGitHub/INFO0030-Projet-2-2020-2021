@@ -8,12 +8,12 @@
 
 # Tools & flags
 CC=gcc
-CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
+CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes -g
 LD=gcc
 LDFLAGS=
 
 # Files
-EXEC=basic_cipher advanced_cipher lfsr_tests archive doc
+EXEC=basic_cipher advanced_cipher lfsr_tests pnm_tests doc
 
 ## Rules
 
