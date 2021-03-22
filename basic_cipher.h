@@ -6,7 +6,7 @@
  * 
  * \author: Dumoulin Peissone S193957
  * \date: 21/03/21
- * \projet: INFO0030 Projet 2
+ * @projet: INFO0030 Projet 2
  */
 
 /*
